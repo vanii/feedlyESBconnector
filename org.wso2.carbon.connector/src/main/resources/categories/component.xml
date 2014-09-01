@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component name="feedly_profile" type="synapse/template">
+<component name="feedly_categories" type="synapse/template">
     <subComponents>
         <component name="listVolume">
             <file>listVolume.xml</file>
