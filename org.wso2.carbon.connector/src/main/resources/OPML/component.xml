@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="feedly_opml" type="synapse/template">
     <subComponents>
-        <component name="listVolume">
-            <file>listVolume.xml</file>
-            <description>List volumes matching for the given query.</description>
+        <component name="importOPML">
+            <file>importOPML.xml</file>
+            <description>Import OPML file</description>
+        </component>
+        <component name="exportOPML">
+            <file>exportOPML.xml</file>
+            <description>Export the user’s subscriptions as an OPML file.</description>
         </component>
     </subComponents>
 </component>
