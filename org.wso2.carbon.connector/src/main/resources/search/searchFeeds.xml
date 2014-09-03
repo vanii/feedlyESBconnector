@@ -1,0 +1,31 @@
+<template name="searchFeeds" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter name="q" description="Search query. Can be a feed url, a site title, a site url or a #topic" />
+    <parameter name="n" description="Number of results" />
+    <parameter name="locale" description="Return feeds in that locale" />
+    <sequence>
+        <property name="uri.var.q" expression="$func:q" />
+        <property name="uri.var.n" expression="$func:n" />
+        <property name="uri.var.locale" expression="$func:locale" />
+
+        <filter
+                xpath="get-property('uri.var.n') = '' or  (not(string(get-property('uri.var.n'))))">
+            <then>
+                <property name="uri.var.n" value="50" />
+            </then>
+        </filter>
+
+        <filter
+                xpath="get-property('uri.var.locale') = '' or  (not(string(get-property('uri.var.locale'))))">
+            <then>
+                <property name="uri.var.locale" value="en_US" />
+            </then>
+        </filter>
+
+        <call>
+            <endpoint>
+                <http method="get"
+                      uri-template="https://cloud.feedly.com/v3/search/feeds?q={uri.var.q}&amp;n={uri.var.n}&amp;locale={uri.var.locale}" />
+            </endpoint>
+        </call>
+    </sequence>
+</template>

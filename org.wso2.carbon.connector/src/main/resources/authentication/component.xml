@@ -9,8 +9,8 @@
             <file>exchangeCode.xml</file>
             <description>Exchanging a code for a refresh token and an access token.</description>
         </component>
-        <component name="revokeiRefreshToken">
-            <file>revokeiRefreshToken.xml</file>
+        <component name="reinvokeRefreshToken">
+            <file>reinvokeRefreshToken.xml</file>
             <description>Using a refresh token.</description>
         </component>
         <component name="useRefreshToken">

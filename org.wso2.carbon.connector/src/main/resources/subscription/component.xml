@@ -11,7 +11,7 @@
             <description>Unsubscribe from a feed.</description>
         </component>
         <component name="getUserSubscription">
-            <file>getUserSubscription.xmll</file>
+            <file>getUserSubscription.xml</file>
             <description>List the user’s subscriptions.</description>
         </component>
         <component name="updateSubscription">

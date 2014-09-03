@@ -10,6 +10,7 @@
         <dependency component="feedly_opml"/>
         <dependency component="feedly_preferences"/>
         <dependency component="feedly_profile"/>
+        <dependency component="feedly_search"/>
         <dependency component="feedly_stream"/>
         <dependency component="feedly_subscription"/>
         <dependency component="feedly_tags"/>
