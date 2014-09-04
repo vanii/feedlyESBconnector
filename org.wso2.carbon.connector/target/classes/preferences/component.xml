@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="feedly_preferences" type="synapse/template">
+    <subComponents>
+        <component name="getPreference">
+            <file>getPreference.xml</file>
+            <description>List the preferences information of the user</description>
+        </component>
+        <component name="updatePreference">
+            <file>updatePreference.xml</file>
+            <description>Update preferences of the user.</description>
+        </component>
+    </subComponents>
+</component>

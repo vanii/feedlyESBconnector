@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="feedly_categories" type="synapse/template">
+    <subComponents>
+        <component name="getCategories">
+            <file>getCategories.xml</file>
+            <description>List all categories about the user</description>
+        </component>
+        <component name="changeLabelCategory">
+            <file>changeLabelCategory.xml</file>
+            <description>Change the label of existing category</description>
+        </component>
+        <component name="deleteCategory">
+            <file>deleteCategory.xml</file>
+            <description>Delete a category</description>
+        </component>
+    </subComponents>
+</component>

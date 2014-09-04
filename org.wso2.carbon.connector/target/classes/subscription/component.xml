@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="feedly_subscription" type="synapse/template">
+    <subComponents>
+
+        <component name="feedSubscribe.xml">
+            <file>feedSubscribe.xml</file>
+            <description>Subscribe to a feed.</description>
+        </component>
+        <component name="feedUnsubscribe">
+            <file>feedUnsubscribe.xml</file>
+            <description>Unsubscribe from a feed.</description>
+        </component>
+        <component name="getUserSubscription">
+            <file>getUserSubscription.xml</file>
+            <description>List the user’s subscriptions.</description>
+        </component>
+        <component name="updateSubscription">
+            <file>updateSubscription.xml</file>
+            <description>Update an existing subscription.</description>
+        </component>
+
+    </subComponents>
+</component>

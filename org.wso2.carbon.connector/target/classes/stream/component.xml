@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="feedly_stream" type="synapse/template">
+    <subComponents>
+        <component name="getEntriesSpecificStream">
+            <file>getEntriesSpecificStream.xml</file>
+            <description>List of entry ids for a specific stream.</description>
+        </component>
+        <component name="getContentStream">
+            <file>getContentStream.xml</file>
+            <description>List the contents of a stream.</description>
+        </component>
+    </subComponents>
+</component>
