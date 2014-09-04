@@ -1,12 +1,112 @@
 <template name="updateProfile" xmlns="http://ws.apache.org/ns/synapse">
-    <parameter name="searchQuery" description="Full-text search query string." />
+    <parameter name="email" description="Email address" />
+    <parameter name="givenName" />
+    <parameter name="familyName" />
+    <parameter name="picture" />
+    <parameter name="gender" />
+    <parameter name="locale" />
+
     <sequence>
-        <property name="uri.var.searchQuery" expression="$func:searchQuery" />
+        <property name="uri.var.email" expression="$func:email" type="STRING"/>
+        <property name="uri.var.givenName" expression="$func:givenName" type="STRING"/>
+        <property name="uri.var.familyName" expression="$func:familyName" type="STRING"/>
+        <property name="uri.var.picture" expression="$func:picture" type="STRING"/>
+        <property name="uri.var.gender" expression="$func:gender" type="STRING"/>
+        <property name="uri.var.locale" expression="$func:locale" type="STRING"/>
+
         <call>
             <endpoint>
-                <http method="get"
-                      uri-template="https://www.googleapis.com/books/v1/volumes?q={uri.var.searchQuery}" />
+                <http method="get" uri-template="{uri.var.apiUrl}/v3/profile" />
             </endpoint>
         </call>
+
+        <filter source="$axis2:HTTP_SC" regex="[2][\d][\d]">
+            <then>
+                <property name="emailTemp" expression="json-eval($.email)" />
+                <property name="givenNameTemp" expression="json-eval($.givenName)" />
+                <property name="familyNameTemp" expression="json-eval($.familyName)" />
+                <property name="pictureTemp" expression="json-eval($.picture)" />
+                <property name="genderTemp" expression="json-eval($.gender)" />
+                <property name="localeTemp" expression="json-eval($.locale)" />
+            </then>
+        </filter>
+
+        <filter source="boolean(get-property('uri.var.email'))" regex="false">
+            <then>
+                <property name="uri.var.email" expression="get-property('emailTemp')" />
+            </then>
+        </filter>
+
+        <filter source="boolean(get-property('uri.var.givenName'))" regex="false">
+            <then>
+                <property name="uri.var.givenName" expression="get-property('givenNameTemp')" />
+            </then>
+        </filter>
+
+        <filter source="boolean(get-property('uri.var.familyName'))" regex="false">
+            <then>
+                <property name="uri.var.familyName" expression="get-property('familyNameTemp')" />
+            </then>
+        </filter>
+
+        <filter source="boolean(get-property('uri.var.picture'))" regex="false">
+            <then>
+                <property name="uri.var.picture" expression="get-property('pictureTemp')" />
+            </then>
+        </filter>
+
+        <filter source="boolean(get-property('uri.var.gender'))" regex="false">
+            <then>
+                <property name="uri.var.gender" expression="get-property('genderTemp')" />
+            </then>
+        </filter>
+
+        <filter source="boolean(get-property('uri.var.locale'))" regex="false">
+            <then>
+                <property name="uri.var.locale" expression="get-property('localeTemp')" />
+            </then>
+        </filter>
+
+
+        <header name="Content-Type" value="application/json" scope="transport" />
+        <property name="messageType" value="application/json" scope="axis2" />
+
+        <payloadFactory media-type="json">
+            <format>
+                {
+                    "email" : "$1",
+                    "givenName" : "$2",
+                    "familyName" : "$3",
+                    "picture" : "$4",
+                    "gender" : "$5",
+                    "locale" : "$6"
+                }
+            </format>
+
+            <args>
+                <arg expression="get-property('uri.var.email')" />
+                <arg expression="get-property('uri.var.givenName')" />
+                <arg expression="get-property('uri.var.familyName')" />
+                <arg expression="get-property('uri.var.picture')" />
+                <arg expression="get-property('uri.var.gender')" />
+                <arg expression="get-property('uri.var.locale')" />
+            </args>
+        </payloadFactory>
+
+        <call>
+            <endpoint>
+                <http method="post"
+                      uri-template="{uri.var.apiUrl}/v3/profile" />
+            </endpoint>
+        </call>
+
+        <!-- Remove response custom header information -->
+        <header name="x-li-format" scope="transport" action="remove" />
+        <header name="X-LI-UUID" scope="transport" action="remove" />
+        <header name="X-Li-Pop" scope="transport" action="remove" />
+        <header name="X-Li-Fabric" scope="transport" action="remove" />
+        <header name="x-li-request-id" scope="transport" action="remove" />
+        <header name="P3P" scope="transport" action="remove" />
+        <header name="Set-Cookie" scope="transport" action="remove" />
     </sequence>
 </template>

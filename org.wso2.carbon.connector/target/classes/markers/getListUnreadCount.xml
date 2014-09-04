@@ -31,7 +31,7 @@
         <call>
             <endpoint>
                 <http method="get"
-                      uri-template="https://cloud.feedly.com/v3/search/feeds?q={uri.var.autoRefresh}&amp;={uri.var.newerThan}&amp;streamId={uri.var.streamId}" />
+                      uri-template="https://cloud.feedly.com/v3/markers/counts?autoRefresh={uri.var.autoRefresh}&amp;newerThan={uri.var.newerThan}&amp;streamId={uri.var.streamId}" />
             </endpoint>
         </call>
     </sequence>

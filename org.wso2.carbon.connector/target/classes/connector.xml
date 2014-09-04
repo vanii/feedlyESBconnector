@@ -5,6 +5,7 @@
         <dependency component="feedly_authentication"/>
         <dependency component="feedly_categories"/>
         <dependency component="feedly_entry"/>
+        <dependency component="feedly_config"/>
         <dependency component="feedly_feeds"/>
         <dependency component="feedly_markers"/>
         <dependency component="feedly_opml"/>

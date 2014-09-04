@@ -1,4 +1,4 @@
-<template name="authenticateUser" xmlns="http://ws.apache.org/ns/synapse">
+<template name="obtainCode" xmlns="http://ws.apache.org/ns/synapse">
     <parameter name="response_type" description="Indicates the type of token requested." />
     <parameter name="client_id" description="Client that is making the request." />
     <parameter name="redirect_uri" description="Determines where the response is sent." />
@@ -38,31 +38,10 @@
             </then>
         </filter>
 
-        <header name="Content-Type" value="application/json"
-                scope="transport" />
-        <property name="messageType" value="application/json"
-                  scope="axis2" />
-        <payloadFactory media-type="json">
-            <format>
-                {
-                    "response_type" : "code" ,
-                    "client_id" : "feedly" ,
-                    "redirect_uri" : "https://cloud.feedly.com/feedly.html" ,
-                    "scope" : "https://cloud.feedly.com/subscriptions"
-                }
-            </format>
-            <args>
-                <arg expression="get-property('uri.var.response_type')" />
-                <arg expression="get-property('uri.var.client_id')" />
-                <arg expression="get-property('uri.var.redirect_uri')" />
-                <arg expression="get-property('uri.var.scope')" />
-            </args>
-        </payloadFactory>
-
         <call>
             <endpoint>
                 <http method="get"
-                      uri-template="https://cloud.feedly.com/v3/auth/auth" />
+                      uri-template="https://cloud.feedly.com/v3/auth/auth?response_type={uri.var.response_type}&amp;client_id={uri.var.client_id}&amp;redirect_uri={uri.var.redirect_uri}&amp;scope={uri.var.scope}" />
             </endpoint>
         </call>
     </sequence>
