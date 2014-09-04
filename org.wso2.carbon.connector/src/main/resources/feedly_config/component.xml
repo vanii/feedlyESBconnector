@@ -5,5 +5,9 @@
             <file>init.xml</file>
             <description>Feedly Connector Configuration</description>
         </component>
+        <component name="obtainCode">
+            <file>obtainCode.xml</file>
+            <description>Authenticating a user and obtaining a code</description>
+        </component>
     </subComponents>
 </component>

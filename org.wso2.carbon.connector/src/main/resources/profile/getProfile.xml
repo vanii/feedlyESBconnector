@@ -1,11 +1,9 @@
 <template name="getProfile" xmlns="http://ws.apache.org/ns/synapse">
-    <parameter name="searchQuery" description="Full-text search query string." />
     <sequence>
-        <property name="uri.var.searchQuery" expression="$func:searchQuery" />
         <call>
             <endpoint>
                 <http method="get"
-                      uri-template="https://www.googleapis.com/books/v1/volumes?q={uri.var.searchQuery}" />
+                      uri-template="{uri.var.apiUrl}/v3/profile" />
             </endpoint>
         </call>
     </sequence>
