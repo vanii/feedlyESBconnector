@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="feedly_tags" type="synapse/template">
+    <subComponents>
+        <component name="changeTagLabel">
+            <file>changeTagLabel.xml</file>
+            <description>Change a tag label.</description>
+        </component>
+        <component name="deleteTags">
+            <file>deleteTags.xml</file>
+            <description>Delete tags</description>
+        </component>
+        <component name="getListTags">
+            <file>getListTags.xml</file>
+            <description>List of tags created by the user.</description>
+        </component>
+        <component name="tagExistingEntry">
+            <file>tagExistingEntry.xml</file>
+            <description>Tag an existing entry</description>
+        </component>
+        <component name="tagMultipleEntries">
+            <file>tagMultipleEntries.xml</file>
+            <description>Tag multiple entries.</description>
+        </component>
+        <component name="untagMultipleEntries">
+            <file>untagMultipleEntries.xml</file>
+            <description>Untag multiple entries</description>
+        </component>
+    </subComponents>
+</component>
