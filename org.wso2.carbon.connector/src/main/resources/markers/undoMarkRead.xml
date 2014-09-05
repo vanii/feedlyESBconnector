@@ -1,12 +1,58 @@
 <template name="undoMarkRead" xmlns="http://ws.apache.org/ns/synapse">
-    <parameter name="searchQuery" description="Full-text search query string." />
-    <sequence>
-        <property name="uri.var.searchQuery" expression="$func:searchQuery" />
-        <call>
-            <endpoint>
-                <http method="get"
-                      uri-template="https://www.googleapis.com/books/v1/volumes?q={uri.var.searchQuery}" />
-            </endpoint>
-        </call>
-    </sequence>
-</template>
+        <parameter name="action" description="undo mark read." />
+        <parameter name="type" description="a String containing the type" />
+        <parameter name="categoryIds" description="a string containing the ids values " />
+
+
+        <sequence>
+            <filter
+                    xpath="get-property('uri.var.action') = '' or  (not(string(get-property('uri.var.action'))))">
+                <then>
+                    <property name="uri.var.action" value="undoMarkAsRead" />
+                </then>
+            </filter>
+            <filter
+                    xpath="get-property('uri.var.type') = '' or  (not(string(get-property('uri.var.type'))))">
+                <then>
+                    <property name="uri.var.type" value="categories" />
+                </then>
+            </filter>
+            <filter
+                    xpath="get-property('uri.var.categoryIds') = '' or  (not(string(get-property('uri.var.categoryIds'))))">
+                <then>
+                    <property name="uri.var.categoryIds" value="TSxGHgRh4oAiHxRU9TgPrpYvYVBPjipkmUVSHGYCTY0=_1449255d60a:22c3491:9c6d71ab" />
+                </then>
+            </filter>
+             <payloadFactory media-type="json">
+                <format> {
+                    "action": "undoMarkAsRead",
+                    "type": "categories",
+                    "categoryIds": [
+                    "user/c805fcbf-3acf-4302-a97e-d82f9d7c897f/category/design",
+                    "user/c805fcbf-3acf-4302-a97e-d82f9d7c897f/category/photography"
+                    ]
+                    }
+                </format>
+                <args>
+                    <arg evaluator="xml" expression="$func:action"/>
+                    <arg evaluator="xml" expression="$func:type"/>
+                    <arg evaluator="xml" expression="$func:categoryIds"/>
+
+                </args>
+            </payloadFactory>
+
+            <property name="uri.var.action" expression="$func:action:action" />
+            <property name="uri.var.entryIds" expression="$func:action:type" />
+            <property name="uri.var.categoryIds"  expression="$func:action:categoryIds" />
+
+
+            <call>
+                <endpoint>
+                    <http method="POST"
+                          uri-template="https://cloud.feedly.com/v3/markers?action={uri.var.action}&amp;categoryIds={uri.var.categoryIds}&amp;type={uri.var.type}"/>
+                </endpoint>
+            </call>
+
+        </sequence>
+
+    </template>

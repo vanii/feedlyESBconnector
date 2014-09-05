@@ -1,5 +1,4 @@
 <template name="markArticleRead"  xmlns="http://ws.apache.org/ns/synapse ">
-
     <parameter name="action" description="mark as read." />
     <parameter name="entryIds" description="a string contain the ids values " />
     <parameter name="type" description="a String containing the type" />
@@ -7,7 +6,7 @@
     <sequence>
         <property name="uri.var.action" expression="$func:action:action" />
         <property name="uri.var.entryIds" expression="$func:action:entryIds" />
-        <property name="uri.var.type"  expression="$func:action:types" />
+        <property name="uri.var.type"  expression="$func:action:type" />
 
         <filter
                 xpath="get-property('uri.var.action') = '' or  (not(string(get-property('uri.var.action'))))">
@@ -44,7 +43,7 @@
             <args>
                 <arg evaluator="xml" expression="$func:action"/>
                 <arg evaluator="xml" expression="$func:entryIds"/>
-                <arg evaluator="xml" expression="$func:types"/>
+                <arg evaluator="xml" expression="$func:type"/>
             </args>
         </payloadFactory>
 

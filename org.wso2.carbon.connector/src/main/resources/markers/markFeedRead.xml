@@ -49,9 +49,9 @@
         </payloadFactory>
 
         <property name="uri.var.action" expression="$func:action:action" />
-        <property name="uri.var.entryIds" expression="$func:action:type" />
-        <property name="uri.var.type"  expression="$func:action:lastReadEntryId" />
-        <property name="uri.var.type"  expression="$func:action:feedIds" />
+        <property name="uri.var.type" expression="$func:action:type" />
+        <property name="uri.var.lastReadEntryId"  expression="$func:action:lastReadEntryId" />
+        <property name="uri.var.feedIds"  expression="$func:action:feedIds" />
 
         <call>
             <endpoint>
