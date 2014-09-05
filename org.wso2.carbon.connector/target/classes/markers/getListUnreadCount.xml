@@ -17,13 +17,13 @@
         <filter
                 xpath="get-property('uri.var.newerThan') = '' or  (not(string(get-property('uri.var.newerThan'))))">
             <then>
-                <property name="uri.var.newerThan" value="50" />
+                <property name="uri.var.newerThan" value="" />
             </then>
         </filter>
         <filter
                 xpath="get-property('uri.var.streamId') = '' or  (not(string(get-property('uri.var.streamId'))))">
             <then>
-                <property name="uri.var.streamId" value="en_US" />
+                <property name="uri.var.streamId" value="" />
             </then>
         </filter>
 

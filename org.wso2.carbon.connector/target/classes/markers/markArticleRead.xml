@@ -5,6 +5,31 @@
     <parameter name="type" description="a String containing the type" />
 
     <sequence>
+        <property name="uri.var.action" expression="$func:action:action" />
+        <property name="uri.var.entryIds" expression="$func:action:entryIds" />
+        <property name="uri.var.type"  expression="$func:action:types" />
+
+        <filter
+                xpath="get-property('uri.var.action') = '' or  (not(string(get-property('uri.var.action'))))">
+            <then>
+                <property name="uri.var.action" value="$1" />
+            </then>
+        </filter>
+
+        <filter
+                xpath="get-property('uri.var.entryIds') = '' or  (not(string(get-property('uri.var.entryIds'))))">
+            <then>
+                <property name="uri.var.entryIds" value="TSxGHgRh4oAiHxRU9TgPrpYvYVBPjipkmUVSHGYCTY0=_14499073085:c034:d32dab1f" />
+            </then>
+        </filter>
+
+        <filter
+                xpath="get-property('uri.var.type') = '' or  (not(string(get-property('uri.var.type'))))">
+            <then>
+                <property name="uri.var.type" value="entries" />
+            </then>
+        </filter>
+
 
         <payloadFactory media-type="json">
             <format> {
@@ -23,9 +48,6 @@
             </args>
         </payloadFactory>
 
-        <property name="uri.var.action" expression="$func:action:action" />
-        <property name="uri.var.entryIds" expression="$func:action:entryIds" />
-        <property name="uri.var.type"  expression="$func:action:types" />
 
         <call>
             <endpoint>
