@@ -1,12 +1,61 @@
 <template name="markArticleSave" xmlns="http://ws.apache.org/ns/synapse">
-    <parameter name="searchQuery" description="Full-text search query string." />
+    <parameter name="action" description="mark as save." />
+    <parameter name="entryIds" description="a string contain the ids values " />
+    <parameter name="type" description="a String containing the type" />
+
     <sequence>
-        <property name="uri.var.searchQuery" expression="$func:searchQuery" />
+        <property name="uri.var.action" expression="$func:action:action" />
+        <property name="uri.var.entryIds" expression="$func:action:entryIds" />
+        <property name="uri.var.type"  expression="$func:action:type" />
+
+        <filter
+                xpath="get-property('uri.var.action') = '' or  (not(string(get-property('uri.var.action'))))">
+            <then>
+                <property name="uri.var.action" value="markAsSaved" />
+            </then>
+        </filter>
+
+        <filter
+                xpath="get-property('uri.var.entryIds') = '' or  (not(string(get-property('uri.var.entryIds'))))">
+            <then>
+                <property name="uri.var.entryIds" value="TSxGHgRh4oAiHxRU9TgPrpYvYVBPjipkmUVSHGYCTY0=_14499073085:c034:d32dab1f" />
+            </then>
+        </filter>
+
+        <filter
+                xpath="get-property('uri.var.type') = '' or  (not(string(get-property('uri.var.type'))))">
+            <then>
+                <property name="uri.var.type" value="entries" />
+            </then>
+        </filter>
+
+
+        <payloadFactory media-type="json">
+            <format>
+                {
+                    "action": "markAsSaved",
+                    "entryIds": [
+                    "TSxGHgRh4oAiHxRU9TgPrpYvYVBPjipkmUVSHGYCTY0=_14499073085:c034:d32dab1f",
+                    "TSxGHgRh4oAiHxRU9TgPrpYvYVBPjipkmUVSHGYCTY0=_1449255d60a:22c3491:9c6d71ab"
+                    ],
+                    "type": "entries"
+                }
+            </format>
+            <args>
+                <arg evaluator="xml" expression="$func:action"/>
+                <arg evaluator="xml" expression="$func:entryIds"/>
+                <arg evaluator="xml" expression="$func:type"/>
+            </args>
+        </payloadFactory>
+
+
         <call>
             <endpoint>
-                <http method="get"
-                      uri-template="https://www.googleapis.com/books/v1/volumes?q={uri.var.searchQuery}" />
+                <http method="POST"
+                      uri-template="https://cloud.feedly.com/v3/markers?action={uri.var.action}&amp;entryIds={uri.var.entryIds}&amp;type={uri.var.type}"/>
             </endpoint>
         </call>
+
     </sequence>
+
 </template>

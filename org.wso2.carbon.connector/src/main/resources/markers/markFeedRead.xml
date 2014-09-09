@@ -1,12 +1,65 @@
 <template name="markFeedRead" xmlns="http://ws.apache.org/ns/synapse">
-    <parameter name="searchQuery" description="Full-text search query string." />
+    <parameter name="action" description="mark as read." />
+    <parameter name="type" description="a String containing the type" />
+    <parameter name="lastReadEntryId" description="a string containing the ids values " />
+    <parameter name="feedIds" description="a String containing the feed id values" />
+
     <sequence>
-        <property name="uri.var.searchQuery" expression="$func:searchQuery" />
+        <filter
+                xpath="get-property('uri.var.action') = '' or  (not(string(get-property('uri.var.action'))))">
+            <then>
+                <property name="uri.var.action" value="markAsRead" />
+            </then>
+        </filter>
+        <filter
+                xpath="get-property('uri.var.type') = '' or  (not(string(get-property('uri.var.type'))))">
+            <then>
+                <property name="uri.var.type" value="feeds" />
+            </then>
+        </filter>
+        <filter
+                xpath="get-property('uri.var.lastReadEntryId') = '' or  (not(string(get-property('uri.var.lastReadEntryId'))))">
+            <then>
+                <property name="uri.var.lastReadEntryId" value="TSxGHgRh4oAiHxRU9TgPrpYvYVBPjipkmUVSHGYCTY0=_1449255d60a:22c3491:9c6d71ab" />
+            </then>
+        </filter>
+        <filter
+                xpath="get-property('uri.var.feedIds') = '' or  (not(string(get-property('uri.var.feedIds'))))">
+            <then>
+                <property name="uri.var.feedIds" value="feed/http://feeds.feedburner.com/design-milk" />
+            </then>
+        </filter>
+
+        <payloadFactory media-type="json">
+            <format> {
+                "action": "markAsRead",
+                "type": "feeds",
+                "lastReadEntryId": "TSxGHgRh4oAiHxRU9TgPrpYvYVBPjipkmUVSHGYCTY0=_1449255d60a:22c3491:9c6d71ab",
+                "feedIds": [
+                "feed/http://feeds.feedburner.com/design-milk"
+                ]
+                }
+            </format>
+            <args>
+                <arg evaluator="xml" expression="$func:action"/>
+                <arg evaluator="xml" expression="$func:type"/>
+                <arg evaluator="xml" expression="$func:lastReadEntryId"/>
+                <arg evaluator="xml" expression="$func:feedIds"/>
+            </args>
+        </payloadFactory>
+
+        <property name="uri.var.action" expression="$func:action:action" />
+        <property name="uri.var.type" expression="$func:action:type" />
+        <property name="uri.var.lastReadEntryId"  expression="$func:action:lastReadEntryId" />
+        <property name="uri.var.feedIds"  expression="$func:action:feedIds" />
+
         <call>
             <endpoint>
-                <http method="get"
-                      uri-template="https://www.googleapis.com/books/v1/volumes?q={uri.var.searchQuery}" />
+                <http method="POST"
+                      uri-template="https://cloud.feedly.com/v3/markers?action={uri.var.action}&amp;lastReadEntryId={uri.var.lastReadEntryId}&amp;type={uri.var.type}&amp;feedIds={uri.var.feedIds}"/>
             </endpoint>
         </call>
+
     </sequence>
+
 </template>

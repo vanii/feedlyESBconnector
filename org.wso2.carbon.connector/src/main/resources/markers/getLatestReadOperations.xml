@@ -1,12 +1,18 @@
 <template name="getLatestTagEntryId" xmlns="http://ws.apache.org/ns/synapse">
-    <parameter name="searchQuery" description="Full-text search query string." />
-    <sequence>
-        <property name="uri.var.searchQuery" expression="$func:searchQuery" />
-        <call>
-            <endpoint>
-                <http method="get"
-                      uri-template="https://www.googleapis.com/books/v1/volumes?q={uri.var.searchQuery}" />
-            </endpoint>
-        </call>
-    </sequence>
-</template>
+        <parameter name="newerThan" description="used as a lower time limit" />
+        <sequence>
+            <property name="uri.var.newerThan" expression="$func:newerThan" />
+             <filter
+                    xpath="get-property('uri.var.newerThan') = '' or  (not(string(get-property('uri.var.newerThan'))))">
+                <then>
+                    <property name="uri.var.newerThan" value="30" />
+                </then>
+            </filter>
+             <call>
+                <endpoint>
+                    <http method="get"
+                          uri-template="https://cloud.feedly.com/v3/markers/reads?newerThan={uri.var.newerThan}&amp;" />
+                </endpoint>
+            </call>
+        </sequence>
+    </template>
