@@ -8,7 +8,6 @@
         <property name="uri.var.newerThan" expression="$func:newerThan" />
         <property name="uri.var.streamId" expression="$func:streamId" />
 
-<<<<<<< HEAD
         <script language="js">
             <![CDATA[
 
@@ -76,36 +75,12 @@
         <log level="custom">
             <property name="requestMethod" expression="get-property('uri.var.params')"/>
         </log>
-=======
-        <filter
-                xpath="get-property('uri.var.autoRefresh') = '' or  (not(string(get-property('uri.var.autoRefresh'))))">
-            <then>
-                <property name="uri.var.autoRefresh" value="yes" />
-            </then>
-        </filter>
-        <filter
-                xpath="get-property('uri.var.newerThan') = '' or  (not(string(get-property('uri.var.newerThan'))))">
-            <then>
-                <property name="uri.var.newerThan" value="" />
-            </then>
-        </filter>
-        <filter
-                xpath="get-property('uri.var.streamId') = '' or  (not(string(get-property('uri.var.streamId'))))">
-            <then>
-                <property name="uri.var.streamId" value="" />
-            </then>
-        </filter>
->>>>>>> da265673aa8ef4b3c15b298e41f4d28b1b8dceca
-
 
         <call>
             <endpoint>
                 <http method="get"
-<<<<<<< HEAD
                       uri-template="https://cloud.feedly.com/v3/markers/counts?{uri.var.params}" />
-=======
-                      uri-template="https://cloud.feedly.com/v3/markers/counts?autoRefresh={uri.var.autoRefresh}&amp;newerThan={uri.var.newerThan}&amp;streamId={uri.var.streamId}" />
->>>>>>> da265673aa8ef4b3c15b298e41f4d28b1b8dceca
+
             </endpoint>
         </call>
     </sequence>
