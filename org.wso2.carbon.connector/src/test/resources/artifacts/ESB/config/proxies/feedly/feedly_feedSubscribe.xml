@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="feedly_feedSubscribe"
+       transports="https,http"
+       statistics="disable"
+       trace="disable"
+       startOnLoad="true">
+    <target>
+        <inSequence>
+            <property name="title" expression="json-eval($.title)"/>
+            <property name="categories" expression="json-eval($.categories)"/>
+            <property name="id" expression="json-eval($.id)"/>
+            <Feedly.test_init/>
+            <Feedly.feedSubscribe>
+                <title>{$ctx:title}</title>
+                <categories>{$ctx:categories}</categories>
+                <feedId>{$ctx:id}</feedId>
+            </Feedly.feedSubscribe>
+            <respond/>
+        </inSequence>
+        <outSequence>
+            <log/>
+            <send/>
+        </outSequence>
+    </target>
+    <description/>
+</proxy>
+                                

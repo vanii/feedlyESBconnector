@@ -1,0 +1,14 @@
+{
+    "title":"Design Milk",
+    "categories":[
+        {
+            "id":"test",
+            "label":"test"
+        },
+        {
+            "id":"wow",
+            "label":"wow"
+        }
+    ],
+    "id":"http://feeds.feedburner.com/AVc"
+}

@@ -5,91 +5,115 @@
     <parameter name="picture" />
     <parameter name="gender" />
     <parameter name="locale" />
+    <parameter name="fullName" />
 
     <sequence>
         <property name="uri.var.email" expression="$func:email" type="STRING"/>
         <property name="uri.var.givenName" expression="$func:givenName" type="STRING"/>
         <property name="uri.var.familyName" expression="$func:familyName" type="STRING"/>
+        <property name="uri.var.fullName" expression="$func:fullName" type="STRING"/>
         <property name="uri.var.picture" expression="$func:picture" type="STRING"/>
         <property name="uri.var.gender" expression="$func:gender" type="STRING"/>
         <property name="uri.var.locale" expression="$func:locale" type="STRING"/>
 
-        <call>
-            <endpoint>
-                <http method="get" uri-template="{uri.var.apiUrl}/v3/profile" />
-            </endpoint>
-        </call>
+        <script language="js">
+            <![CDATA[
 
-        <filter source="$axis2:HTTP_SC" regex="[2][\d][\d]">
-            <then>
-                <property name="emailTemp" expression="json-eval($.email)" />
-                <property name="givenNameTemp" expression="json-eval($.givenName)" />
-                <property name="familyNameTemp" expression="json-eval($.familyName)" />
-                <property name="pictureTemp" expression="json-eval($.picture)" />
-                <property name="genderTemp" expression="json-eval($.gender)" />
-                <property name="localeTemp" expression="json-eval($.locale)" />
-            </then>
-        </filter>
+			var email = mc.getProperty('uri.var.email');
+			var givenName = mc.getProperty('uri.var.givenName');
+			var familyName = mc.getProperty('uri.var.familyName');
+			var fullName = mc.getProperty('uri.var.fullName');
+			var picture = mc.getProperty('uri.var.picture');
+			var gender = mc.getProperty('uri.var.gender');
+			var locale = mc.getProperty('uri.var.locale');
+			var added = 0;
 
-        <filter source="boolean(get-property('uri.var.email'))" regex="false">
-            <then>
-                <property name="uri.var.email" expression="get-property('emailTemp')" />
-            </then>
-        </filter>
+            var query = "{";
 
-        <filter source="boolean(get-property('uri.var.givenName'))" regex="false">
-            <then>
-                <property name="uri.var.givenName" expression="get-property('givenNameTemp')" />
-            </then>
-        </filter>
+			if (email != null && email != "") {
+			    if(Boolean(added)) {
+			        query = query + ',\"email\":\"' + email + '\"';
+			    }else {
+			        query = query + '\"email\":\"' + email + '\"';
+			        added = 1;
+			    }
+			}
 
-        <filter source="boolean(get-property('uri.var.familyName'))" regex="false">
-            <then>
-                <property name="uri.var.familyName" expression="get-property('familyNameTemp')" />
-            </then>
-        </filter>
+			if (givenName != null && givenName != "") {
+				if(Boolean(added)) {
+			        query = query + ',\"givenName\":\"' + givenName + '\"';
+			    }else {
+			        query = query + '\"givenName\":\"' + givenName + '\"';
+			        added = 1;
+			    }
+			}
 
-        <filter source="boolean(get-property('uri.var.picture'))" regex="false">
-            <then>
-                <property name="uri.var.picture" expression="get-property('pictureTemp')" />
-            </then>
-        </filter>
+			if (familyName != null && familyName != "") {
+				if(Boolean(added)) {
+			        query = query + ',\"familyName\":\"' + familyName + '\"';
+			    }else {
+			        query = query + '\"familyName\":\"' + familyName + '\"';
+			        added = 1;
+			    }
+			}
 
-        <filter source="boolean(get-property('uri.var.gender'))" regex="false">
-            <then>
-                <property name="uri.var.gender" expression="get-property('genderTemp')" />
-            </then>
-        </filter>
+			if (fullName != null && fullName != "") {
+				if(Boolean(added)) {
+			        query = query + ',\"fullName\":\"' + fullName + '\"';
+			    }else {
+			        query = query + '\"fullName\":\"' + fullName + '\"';
+			        added = 1;
+			    }
+			}
 
-        <filter source="boolean(get-property('uri.var.locale'))" regex="false">
-            <then>
-                <property name="uri.var.locale" expression="get-property('localeTemp')" />
-            </then>
-        </filter>
+			if (picture != null && picture != "") {
+				if(Boolean(added)) {
+			        query = query + ',\"picture\":\"' + picture + '\"';
+			    }else {
+			        query = query + '\"picture\":\"' + picture + '\"';
+			        added = 1;
+			    }
+			}
 
+			if (gender != null && gender != "") {
+				if(Boolean(added)) {
+			        query = query + ',\"gender\":\"' + gender + '\"';
+			    }else {
+			        query = query + '\"gender\":\"' + gender + '\"';
+			        added = 1;
+			    }
+			}
+
+			if (locale != null && locale != "") {
+				if(Boolean(added)) {
+			        query = query + ',\"locale\":\"' + locale + '\"';
+			    }else {
+			        query = query + '\"locale\":\"' + locale + '\"';
+			        added = 1;
+			    }
+			}
+
+			query = query + "}" ;
+
+			mc.setProperty('uri.var.query', query);
+
+	 	]]>
+        </script>
+
+        <log level="custom">
+            <property name="payload" expression="get-property('uri.var.query')"/>
+        </log>
 
         <header name="Content-Type" value="application/json" scope="transport" />
         <property name="messageType" value="application/json" scope="axis2" />
 
         <payloadFactory media-type="json">
             <format>
-                {
-                    "email" : "$1",
-                    "givenName" : "$2",
-                    "familyName" : "$3",
-                    "picture" : "$4",
-                    "gender" : "$5",
-                    "locale" : "$6"
-                }
+                $1
             </format>
 
             <args>
-                <arg expression="get-property('uri.var.email')" />
-                <arg expression="get-property('uri.var.givenName')" />
-                <arg expression="get-property('uri.var.familyName')" />
-                <arg expression="get-property('uri.var.picture')" />
-                <arg expression="get-property('uri.var.gender')" />
-                <arg expression="get-property('uri.var.locale')" />
+                <arg expression="get-property('uri.var.query')" />
             </args>
         </payloadFactory>
 

@@ -1,12 +1,32 @@
 <template name="feedUnsubscribe" xmlns="http://ws.apache.org/ns/synapse">
-    <parameter name="searchQuery" description="Full-text search query string." />
+    <parameter name="feedId" description="Title of the Feed." />
+
     <sequence>
-        <property name="uri.var.searchQuery" expression="$func:searchQuery" />
+        <property name="uri.var.feedId" expression="$func:feedId" />
+
+        <property name="uri.var.feedId"
+                  expression="fn:concat('feed/', get-property('uri.var.feedId'))" />
+
+        <script language="js"><![CDATA[
+
+            var id = mc.getProperty('uri.var.feedId');
+            var encoded = encodeURIComponent(id);
+
+            mc.setProperty('id', encoded);
+
+
+         ]]></script>
+
+        <log level="custom">
+            <property name="deleteID" expression="get-property('id')"/>
+        </log>
+
         <call>
             <endpoint>
-                <http method="get"
-                      uri-template="https://www.googleapis.com/books/v1/volumes?q={uri.var.searchQuery}" />
+                <http method="delete"
+                      uri-template="{uri.var.apiUrl}/v3/subscriptions/feed%252f{uri.var.feedId}" />
             </endpoint>
         </call>
+
     </sequence>
 </template>

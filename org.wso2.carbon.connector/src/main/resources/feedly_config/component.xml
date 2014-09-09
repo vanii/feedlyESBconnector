@@ -9,5 +9,10 @@
             <file>obtainCode.xml</file>
             <description>Authenticating a user and obtaining a code</description>
         </component>
+        <component name="test_init">
+            <file>test_init.xml</file>
+            <description>Authenticating a user and obtaining a code</description>
+        </component>
+
     </subComponents>
 </component>

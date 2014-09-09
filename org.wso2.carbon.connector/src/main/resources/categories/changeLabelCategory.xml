@@ -1,11 +1,50 @@
 <template name="changeLabelCategory" xmlns="http://ws.apache.org/ns/synapse">
-    <parameter name="searchQuery" description="Full-text search query string." />
+    <parameter name="oldLabel" description="Label of the Category to be changed." />
+    <parameter name="newLabel" description="The new label for category." />
+
     <sequence>
-        <property name="uri.var.searchQuery" expression="$func:searchQuery" />
+        <property name="uri.var.oldLabel" expression="$func:oldLabel" />
+        <property name="uri.var.newLabel" expression="$func:newLabel" />
+
+        <header name="Content-Type" value="application/json"
+                scope="transport" />
+        <property name="messageType" value="application/json"
+                  scope="axis2" />
+
+        <property name="feedly.categoryId"
+                  expression="fn:concat('user/', get-property('uri.var.userId'),'/category/',get-property('uri.var.oldLabel') )" />
+
+        <script language="js"><![CDATA[
+
+					var message = mc.getProperty('feedly.categoryId');
+					var encoded = encodeURIComponent(encodeURIComponent(message));
+
+					mc.setProperty('id', encoded);
+
+
+        		 ]]></script>
+
+        <!--<log level="custom">
+            <property name="requestMethod" expression="get-property('id')"/>
+        </log>-->
+
+
+        <payloadFactory media-type="json">
+            <format>
+                {
+                "label" : "$1"
+                }
+            </format>
+            <args>
+                <arg expression="get-property('uri.var.newLabel')" />
+            </args>
+        </payloadFactory>
+
+
         <call>
             <endpoint>
-                <http method="get"
-                      uri-template="https://www.googleapis.com/books/v1/volumes?q={uri.var.searchQuery}" />
+                <http method="post"
+                      uri-template="{uri.var.apiUrl}/v3/categories/user%252F{uri.var.userId}%252Fcategory%252F{uri.var.oldLabel}" />
             </endpoint>
         </call>
     </sequence>

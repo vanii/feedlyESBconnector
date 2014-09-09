@@ -1,11 +1,32 @@
 <template name="deleteCategory" xmlns="http://ws.apache.org/ns/synapse">
-    <parameter name="searchQuery" description="Full-text search query string." />
+    <parameter name="label" description="Label of the Category to be deleted." />
     <sequence>
-        <property name="uri.var.searchQuery" expression="$func:searchQuery" />
+        <property name="uri.var.label" expression="$func:label" />
+        <log level="custom">
+            <property name="requestMethod" expression="get-property('uri.var.label')"/>
+        </log>
+
+
+        <property name="feedly.categoryId"
+                  expression="fn:concat('user/', get-property('uri.var.userId'),'/category/',get-property('uri.var.label') )" />
+
+        <script language="js"><![CDATA[
+
+					var message = mc.getProperty('feedly.categoryId');
+					var encoded = encodeURIComponent(encodeURIComponent(message));
+
+					mc.setProperty('id', encoded);
+
+
+        		 ]]></script>
+
+        <log level="custom">
+            <property name="requestMethod" expression="get-property('id')"/>
+        </log>
         <call>
             <endpoint>
-                <http method="get"
-                      uri-template="https://www.googleapis.com/books/v1/volumes?q={uri.var.searchQuery}" />
+                <http method="delete"
+                      uri-template="{uri.var.apiUrl}/v3/categories/user%252F{uri.var.userId}%252Fcategory%252F{uri.var.label}" />
             </endpoint>
         </call>
     </sequence>

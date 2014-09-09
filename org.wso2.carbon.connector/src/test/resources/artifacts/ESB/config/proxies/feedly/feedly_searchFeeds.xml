@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="feedly_searchFeeds"
+       transports="https,http"
+       statistics="disable"
+       trace="disable"
+       startOnLoad="true">
+    <target>
+        <inSequence>
+            <property name="q" expression="json-eval($.q)"/>
+            <property name="n" expression="json-eval($.n)"/>
+            <property name="locale" expression="json-eval($.locale)"/>
+            <Feedly.searchFeeds>
+                <q>{$ctx:q}</q>
+                <n>{$ctx:n}</n>
+                <locale>{$ctx:locale}</locale>
+            </Feedly.searchFeeds>
+            <respond/>
+        </inSequence>
+        <outSequence>
+            <log/>
+            <send/>
+        </outSequence>
+    </target>
+    <description/>
+</proxy>

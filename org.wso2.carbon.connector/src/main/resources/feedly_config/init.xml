@@ -57,8 +57,10 @@
         <filter source="$axis2:HTTP_SC" regex="[2][\d][\d]">
             <then>
                 <property name="token" expression="json-eval($.access_token)" />
+
                 <header name="Authorization" expression="get-property('token')"
                         scope="transport" />
+
                 <property name="uri.var.userId" expression="json-eval($.id)" />
                 <property name="uri.var.refreshToken" expression="json-eval($.refresh_token)" />
             </then>
