@@ -1,4 +1,5 @@
 {
 "accessToken":"%s(accessToken)",
-"label":"keep"
+"id":"%s",
+"interest":"%s"
 }

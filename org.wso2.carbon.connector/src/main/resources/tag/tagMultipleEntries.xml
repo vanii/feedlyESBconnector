@@ -1,12 +1,75 @@
 <template name="tagMultipleEntries" xmlns="http://ws.apache.org/ns/synapse">
-    <parameter name="searchQuery" description="Full-text search query string." />
+    <parameter name="tagId" description="Id of a tag.eg: user/" />
+    <parameter name="entryId" description="Categories subscribed to the feed." />
+
     <sequence>
-        <property name="uri.var.searchQuery" expression="$func:searchQuery" />
+        <property name="uri.var.tagId" expression="$func:tagId" />
+        <property name="uri.var.entryId" expression="$func:entryId" />
+
+
+        <log level="custom">
+            <property name="entryId" expression="get-property('uri.var.entryId')"/>
+        </log>
+
+        <script language="js">
+            <![CDATA[
+
+			var tags = '{"tags":' + mc.getProperty('uri.var.tagId') + '}';
+
+            var query = "";
+
+			if (mc.getProperty('uri.var.tagId') != null && mc.getProperty('uri.var.tagId') != "") {
+
+                var tagsObj = eval ("(" + tags + ")");
+
+                var count = 0;
+			    for (var key in tagsObj.tags) {
+                    if (tagsObj.tags.hasOwnProperty(key)) {
+                        if(count == 0 ) {
+                            query = query + 'user%252F'+mc.getProperty('uri.var.userId')+'%252Ftag%252F' + tagsObj.tags[key].id;
+                            count =1;
+                        }else {
+                            query = query + ',user%252F'+mc.getProperty('uri.var.userId')+'%252Ftag%252F' + tagsObj.tags[key].id;
+                        }
+
+                    }
+                }
+
+			}
+
+			mc.setProperty('uri.var.query', query);
+
+	 	]]>
+        </script>
+
+        <log level="custom">
+            <property name="json" expression="get-property('uri.var.query')"/>
+        </log>
+
+        <header name="Content-Type" value="application/json"
+                scope="transport" />
+        <property name="messageType" value="application/json"
+                  scope="axis2" />
+
+
+        <payloadFactory media-type="json">
+            <format>
+                {
+                "entryId":$1
+                }
+            </format>
+            <args>
+                <arg expression="get-property('uri.var.entryId')" />
+            </args>
+        </payloadFactory>
+
+
         <call>
             <endpoint>
-                <http method="get"
-                      uri-template="https://www.googleapis.com/books/v1/volumes?q={uri.var.searchQuery}" />
+                <http method="put"
+                      uri-template="{uri.var.apiUrl}/v3/tags/{uri.var.query}" />
             </endpoint>
         </call>
+
     </sequence>
 </template>

@@ -9,8 +9,8 @@
             <file>deleteTags.xml</file>
             <description>Delete tags</description>
         </component>
-        <component name="getListTags">
-            <file>getListTags.xml</file>
+        <component name="getListOfTags">
+            <file>getListOfTags.xml</file>
             <description>List of tags created by the user.</description>
         </component>
         <component name="tagExistingEntry">

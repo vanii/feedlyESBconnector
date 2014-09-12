@@ -40,7 +40,6 @@
             </args>
         </payloadFactory>
 
-
         <call>
             <endpoint>
                 <http method="post"

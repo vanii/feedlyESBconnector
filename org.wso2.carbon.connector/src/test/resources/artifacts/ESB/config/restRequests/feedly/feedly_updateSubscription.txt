@@ -1,4 +1,5 @@
 {
+    "accessToken":"%s(accessToken)",
     "title":"Design Milk",
     "categories":[
         {

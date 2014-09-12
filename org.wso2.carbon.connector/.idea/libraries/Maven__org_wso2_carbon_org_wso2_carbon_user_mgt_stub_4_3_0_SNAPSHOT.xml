@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: org.wso2.carbon:org.wso2.carbon.user.mgt.stub:4.3.0-SNAPSHOT">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/wso2/carbon/org.wso2.carbon.user.mgt.stub/4.3.0-SNAPSHOT/org.wso2.carbon.user.mgt.stub-4.3.0-20140907.195428-827.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/wso2/carbon/org.wso2.carbon.user.mgt.stub/4.3.0-SNAPSHOT/org.wso2.carbon.user.mgt.stub-4.3.0-20140908.195459-829.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/org/wso2/carbon/org.wso2.carbon.user.mgt.stub/4.3.0-SNAPSHOT/org.wso2.carbon.user.mgt.stub-4.3.0-20140907.195428-827-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/wso2/carbon/org.wso2.carbon.user.mgt.stub/4.3.0-SNAPSHOT/org.wso2.carbon.user.mgt.stub-4.3.0-20140908.195459-829-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/wso2/carbon/org.wso2.carbon.user.mgt.stub/4.3.0-SNAPSHOT/org.wso2.carbon.user.mgt.stub-4.3.0-20140907.195428-827-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/wso2/carbon/org.wso2.carbon.user.mgt.stub/4.3.0-SNAPSHOT/org.wso2.carbon.user.mgt.stub-4.3.0-20140908.195459-829-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

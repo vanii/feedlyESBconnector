@@ -7,8 +7,11 @@
        startOnLoad="true">
     <target>
         <inSequence>
-            <Feedly.test_init/>
-            <Feedly.getUserSubscription/>
+            <property name="accessToken" expression="json-eval($.accessToken)"/>
+            <feedly.test_init>
+                <accessToken>{$ctx:accessToken}</accessToken>
+            </feedly.test_init>
+            <feedly.getUserSubscription/>
             <respond/>
         </inSequence>
         <outSequence>

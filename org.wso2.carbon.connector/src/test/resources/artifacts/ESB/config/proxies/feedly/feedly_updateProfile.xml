@@ -7,21 +7,24 @@
        startOnLoad="true">
     <target>
         <inSequence>
+            <property name="accessToken" expression="json-eval($.accessToken)"/>
             <property name="email" expression="json-eval($.email)"/>
             <property name="givenName" expression="json-eval($.givenName)"/>
             <property name="familyName" expression="json-eval($.familyName)"/>
             <property name="picture" expression="json-eval($.picture)"/>
             <property name="gender" expression="json-eval($.gender)"/>
             <property name="locale" expression="json-eval($.locale)"/>
-            <Feedly.test_init/>
-            <Feedly.updateProfile>
+            <feedly.test_init>
+                <accessToken>{$ctx:accessToken}</accessToken>
+            </feedly.test_init>
+            <feedly.updateProfile>
                 <email>{$ctx:email}</email>
                 <givenName>{$ctx:givenName}</givenName>
                 <familyName>{$ctx:familyName}</familyName>
                 <picture>{$ctx:picture}</picture>
                 <gender>{$ctx:gender}</gender>
                 <locale>{$ctx:locale}</locale>
-            </Feedly.updateProfile>
+            </feedly.updateProfile>
             <respond/>
         </inSequence>
         <outSequence>

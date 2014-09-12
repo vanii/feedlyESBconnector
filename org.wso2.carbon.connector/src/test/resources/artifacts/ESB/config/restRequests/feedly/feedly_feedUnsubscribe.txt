@@ -1,3 +1,4 @@
 {
+    "accessToken":"%s(accessToken)",
     "id":"http://feeds.feedburner.com/AVc"
 }

@@ -1,1 +1,5 @@
-{"oldLabel":"test","newLabel":"changedLabel"}
+{
+"accessToken":"%s",
+"oldLabel":"test",
+"newLabel":"testChange"
+}

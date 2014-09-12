@@ -1,7 +1,11 @@
 <template name="test_init" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter name="accessToken" description="Access Token." />
 
     <sequence>
+        <property name="uri.var.token" expression="$func:accessToken" />
+        <!--
         <property name="uri.var.token" value="AmuVwGN7ImEiOiJGZWVkbHkgRGV2ZWxvcGVyIiwiZSI6MTQxNjk5NjY5OTYwMCwiaSI6IjE2MzU2MjFhLTYwNzktNGIxZS1iZjA4LWZhMzgxMmY5MDM0NSIsInAiOjYsInQiOjEsInYiOiJwcm9kdWN0aW9uIiwidyI6IjIwMTQuMzUiLCJ4Ijoic3RhbmRhcmQifQ:feedlydev" />
+        -->
         <property name="uri.var.userId" value="1635621a-6079-4b1e-bf08-fa3812f90345" />
         <property name="uri.var.apiUrl" value="https://cloud.feedly.com" />
 

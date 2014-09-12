@@ -1,7 +1,8 @@
 {
+"accessToken":"%s(accessToken)",
 "email":"zamly187@gmail.com",
 "givenName":"zamly",
-"familyName":"thaha",
+"familyName":"Thaha",
 "picture":"",
 "gender":"male",
 "locale":"en_US"

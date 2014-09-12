@@ -1,0 +1,18 @@
+<template name="getEntryContent" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter name="entryId" description="Id of the Entry." />
+    <sequence>
+        <property name="uri.var.entryId" expression="$func:entryId" />
+
+
+        <log level="custom">
+            <property name="entryID" expression="get-property('uri.var.entryId')"/>
+        </log>
+
+        <call>
+            <endpoint>
+                <http method="get"
+                      uri-template="{uri.var.apiUrl}/v3/entries/{uri.var.entryId}" />
+            </endpoint>
+        </call>
+    </sequence>
+</template>

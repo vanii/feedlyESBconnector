@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: org.wso2.carbon:org.wso2.carbon.authenticator.stub:4.3.0-SNAPSHOT">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/wso2/carbon/org.wso2.carbon.authenticator.stub/4.3.0-SNAPSHOT/org.wso2.carbon.authenticator.stub-4.3.0-20140908.003225-621.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/wso2/carbon/org.wso2.carbon.authenticator.stub/4.3.0-SNAPSHOT/org.wso2.carbon.authenticator.stub-4.3.0-20140908.201349-622.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/org/wso2/carbon/org.wso2.carbon.authenticator.stub/4.3.0-SNAPSHOT/org.wso2.carbon.authenticator.stub-4.3.0-20140908.003225-621-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/wso2/carbon/org.wso2.carbon.authenticator.stub/4.3.0-SNAPSHOT/org.wso2.carbon.authenticator.stub-4.3.0-20140908.201349-622-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/wso2/carbon/org.wso2.carbon.authenticator.stub/4.3.0-SNAPSHOT/org.wso2.carbon.authenticator.stub-4.3.0-20140908.003225-621-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/wso2/carbon/org.wso2.carbon.authenticator.stub/4.3.0-SNAPSHOT/org.wso2.carbon.authenticator.stub-4.3.0-20140908.201349-622-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

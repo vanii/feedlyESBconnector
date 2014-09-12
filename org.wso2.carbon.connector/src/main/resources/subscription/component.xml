@@ -2,7 +2,7 @@
 <component name="feedly_subscription" type="synapse/template">
     <subComponents>
 
-        <component name="feedSubscribe.xml">
+        <component name="feedSubscribe">
             <file>feedSubscribe.xml</file>
             <description>Subscribe to a feed.</description>
         </component>

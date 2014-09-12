@@ -1,9 +1,9 @@
-<template name="getListTopics" xmlns="http://ws.apache.org/ns/synapse">
+<template name="getListOfTags" xmlns="http://ws.apache.org/ns/synapse">
     <sequence>
         <call>
             <endpoint>
                 <http method="get"
-                      uri-template="{uri.var.apiUrl}/v3/topics" />
+                      uri-template="{uri.var.apiUrl}/v3/tags" />
             </endpoint>
         </call>
     </sequence>

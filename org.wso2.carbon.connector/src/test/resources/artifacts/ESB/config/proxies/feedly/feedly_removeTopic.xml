@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <proxy xmlns="http://ws.apache.org/ns/synapse"
-       name="feedly_feedUnsubscribe"
+       name="feedly_removeTopic"
        transports="https,http"
        statistics="disable"
        trace="disable"
@@ -8,13 +8,13 @@
     <target>
         <inSequence>
             <property name="accessToken" expression="json-eval($.accessToken)"/>
-            <property name="id" expression="json-eval($.id)"/>
+            <property name="topicId" expression="json-eval($.topicId)"/>
             <feedly.test_init>
                 <accessToken>{$ctx:accessToken}</accessToken>
             </feedly.test_init>
-            <feedly.feedUnsubscribe>
-                <feedId>{$ctx:id}</feedId>
-            </feedly.feedUnsubscribe>
+            <feedly.removeTopic>
+                <topicId>{$ctx:topicId}</topicId>
+            </feedly.removeTopic>
             <respond/>
         </inSequence>
         <outSequence>

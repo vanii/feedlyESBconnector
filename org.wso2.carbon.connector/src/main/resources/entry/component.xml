@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="feedly_entry" type="synapse/template">
     <subComponents>
-        <component name="getContent">
-            <file>getContent.xml</file>
+        <component name="getEntryContent">
+            <file>getEntryContent.xml</file>
             <description>List the contents for an entry.</description>
         </component>
         <component name="getDynamicEntry">

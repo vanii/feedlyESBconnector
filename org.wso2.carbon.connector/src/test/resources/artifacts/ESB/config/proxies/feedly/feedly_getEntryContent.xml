@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <proxy xmlns="http://ws.apache.org/ns/synapse"
-       name="feedly_getProfile"
+       name="feedly_getEntryContent"
        transports="https,http"
        statistics="disable"
        trace="disable"
        startOnLoad="true">
     <target>
         <inSequence>
-            <property name="accessToken" expression="json-eval($.accessToken)"/>
-            <feedly.test_init>
-                <accessToken>{$ctx:accessToken}</accessToken>
-            </feedly.test_init>
-            <feedly.getProfile/>
+            <property name="entryId" expression="json-eval($.entryId)"/>
+            <feedly.getEntryContent>
+                <entryId>{$ctx:entryId}</entryId>
+            </feedly.getEntryContent>
             <respond/>
         </inSequence>
         <outSequence>

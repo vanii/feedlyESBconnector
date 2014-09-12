@@ -7,13 +7,16 @@
        startOnLoad="true">
     <target>
         <inSequence>
+            <property name="accessToken" expression="json-eval($.accessToken)"/>
             <property name="oldLabel" expression="json-eval($.oldLabel)"/>
             <property name="newLabel" expression="json-eval($.newLabel)"/>
-            <Feedly.test_init/>
-            <Feedly.changeLabelCategory>
+            <feedly.test_init>
+                <accessToken>{$ctx:accessToken}</accessToken>
+            </feedly.test_init>
+            <feedly.changeLabelCategory>
                 <oldLabel>{$ctx:oldLabel}</oldLabel>
                 <newLabel>{$ctx:newLabel}</newLabel>
-            </Feedly.changeLabelCategory>
+            </feedly.changeLabelCategory>
             <respond/>
         </inSequence>
         <outSequence>

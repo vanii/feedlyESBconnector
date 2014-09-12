@@ -7,11 +7,14 @@
        startOnLoad="true">
     <target>
         <inSequence>
+            <property name="accessToken" expression="json-eval($.accessToken)"/>
             <property name="label" expression="json-eval($.label)"/>
-            <Feedly.test_init/>
-            <Feedly.deleteCategory>
+            <feedly.test_init>
+                <accessToken>{$ctx:accessToken}</accessToken>
+            </feedly.test_init>
+            <feedly.deleteCategory>
                 <label>{$ctx:label}</label>
-            </Feedly.deleteCategory>
+            </feedly.deleteCategory>
             <respond/>
         </inSequence>
         <outSequence>

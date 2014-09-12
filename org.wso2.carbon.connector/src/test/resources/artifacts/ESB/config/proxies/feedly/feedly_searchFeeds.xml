@@ -10,11 +10,11 @@
             <property name="q" expression="json-eval($.q)"/>
             <property name="n" expression="json-eval($.n)"/>
             <property name="locale" expression="json-eval($.locale)"/>
-            <Feedly.searchFeeds>
+            <feedly.searchFeeds>
                 <q>{$ctx:q}</q>
                 <n>{$ctx:n}</n>
                 <locale>{$ctx:locale}</locale>
-            </Feedly.searchFeeds>
+            </feedly.searchFeeds>
             <respond/>
         </inSequence>
         <outSequence>

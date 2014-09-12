@@ -1,11 +1,50 @@
 <template name="addTopic" xmlns="http://ws.apache.org/ns/synapse">
-    <parameter name="searchQuery" description="Full-text search query string." />
+    <parameter name="id" description="id of the topic" />
+    <parameter name="interest" description="The level of interest for the topic. takes values high|medium|low" />
+
     <sequence>
-        <property name="uri.var.searchQuery" expression="$func:searchQuery" />
+        <property name="uri.var.id" expression="$func:id" />
+        <property name="uri.var.interest" expression="$func:interest" />
+
+        <header name="Content-Type" value="application/json"
+                scope="transport" />
+        <property name="messageType" value="application/json"
+                  scope="axis2" />
+
+
+        <script language="js">
+        <![CDATA[
+
+            var id = mc.getProperty('uri.var.id');
+            var topic = 'user/' + mc.getProperty('uri.var.userId') + '/topic/' + id;
+
+            mc.setProperty('uri.var.topicId', topic);
+
+
+         ]]></script>
+
+        <!--<log level="custom">
+            <property name="requestMethod" expression="get-property('id')"/>
+        </log>-->
+
+
+        <payloadFactory media-type="json">
+            <format>
+                {
+                "id" : "$1",
+                "interest" : "$2"
+                }
+            </format>
+            <args>
+                <arg expression="get-property('uri.var.topicId')" />
+                <arg expression="get-property('uri.var.interest')" />
+            </args>
+        </payloadFactory>
+
         <call>
             <endpoint>
-                <http method="get"
-                      uri-template="https://www.googleapis.com/books/v1/volumes?q={uri.var.searchQuery}" />
+                <http method="post"
+                      uri-template="{uri.var.apiUrl}/v3/topics" />
             </endpoint>
         </call>
     </sequence>
