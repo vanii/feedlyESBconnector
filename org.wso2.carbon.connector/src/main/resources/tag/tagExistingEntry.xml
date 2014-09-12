@@ -21,10 +21,10 @@
 			    for (var key in tagsObj.tags) {
                     if (tagsObj.tags.hasOwnProperty(key)) {
                         if(count == 0 ) {
-                            query = query + 'user%252F'+mc.getProperty('uri.var.userId')+'%252Ftag%252F' + tagsObj.tags[key].id;
+                            query = query + 'user%2F'+mc.getProperty('uri.var.userId')+'%2Ftag%2F' + tagsObj.tags[key].id;
                             count =1;
                         }else {
-                            query = query + ',user%252F'+mc.getProperty('uri.var.userId')+'%252Ftag%252F' + tagsObj.tags[key].id;
+                            query = query + ',user%2F'+mc.getProperty('uri.var.userId')+'%2Ftag%2F' + tagsObj.tags[key].id;
                         }
 
                     }

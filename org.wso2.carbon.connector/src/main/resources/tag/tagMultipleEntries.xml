@@ -1,20 +1,16 @@
 <template name="tagMultipleEntries" xmlns="http://ws.apache.org/ns/synapse">
     <parameter name="tagId" description="Id of a tag.eg: user/" />
-    <parameter name="entryId" description="Categories subscribed to the feed." />
+    <parameter name="entryId" description="entry ID" />
 
     <sequence>
         <property name="uri.var.tagId" expression="$func:tagId" />
         <property name="uri.var.entryId" expression="$func:entryId" />
 
-
-        <log level="custom">
-            <property name="entryId" expression="get-property('uri.var.entryId')"/>
-        </log>
-
         <script language="js">
             <![CDATA[
 
 			var tags = '{"tags":' + mc.getProperty('uri.var.tagId') + '}';
+			var entries = '{"entries":' + mc.getProperty('uri.var.entryId') + '}';
 
             var query = "";
 
@@ -26,10 +22,10 @@
 			    for (var key in tagsObj.tags) {
                     if (tagsObj.tags.hasOwnProperty(key)) {
                         if(count == 0 ) {
-                            query = query + 'user%252F'+mc.getProperty('uri.var.userId')+'%252Ftag%252F' + tagsObj.tags[key].id;
+                            query = query + 'user%2F'+mc.getProperty('uri.var.userId')+'%2Ftag%2F' + tagsObj.tags[key].id;
                             count =1;
                         }else {
-                            query = query + ',user%252F'+mc.getProperty('uri.var.userId')+'%252Ftag%252F' + tagsObj.tags[key].id;
+                            query = query + ',user%2F'+mc.getProperty('uri.var.userId')+'%2Ftag%2F' + tagsObj.tags[key].id;
                         }
 
                     }
@@ -37,13 +33,40 @@
 
 			}
 
+			var queryEntry = "[";
+
+			if (mc.getProperty('uri.var.entryId') != null && mc.getProperty('uri.var.entryId') != "") {
+
+                var entriesObj = eval ("(" + entries + ")");
+
+                var count = 0;
+			    for (var key in entriesObj.entries) {
+                    if (entriesObj.entries.hasOwnProperty(key)) {
+                        if(count == 0 ) {
+                            queryEntry = queryEntry + '"'+entriesObj.entries[key]+'"';
+                            count =1;
+                        }else {
+                            queryEntry = queryEntry + ',"'+entriesObj.entries[key]+'"';
+                        }
+
+                    }
+                }
+                queryEntry = queryEntry + "]";
+
+			}
+
 			mc.setProperty('uri.var.query', query);
+			mc.setProperty('uri.var.queryEntry', queryEntry);
+
 
 	 	]]>
         </script>
 
         <log level="custom">
             <property name="json" expression="get-property('uri.var.query')"/>
+        </log>
+        <log level="custom">
+            <property name="queryEntry" expression="get-property('uri.var.queryEntry')"/>
         </log>
 
         <header name="Content-Type" value="application/json"
@@ -55,11 +78,11 @@
         <payloadFactory media-type="json">
             <format>
                 {
-                "entryId":$1
+                "entryIds":$1
                 }
             </format>
             <args>
-                <arg expression="get-property('uri.var.entryId')" />
+                <arg expression="get-property('uri.var.queryEntry')" />
             </args>
         </payloadFactory>
 
