@@ -1,0 +1,58 @@
+<template name="getEngagingContentInStream" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter name="streamId" description="Id of the Entry." />
+    <parameter name="count" description="Id of the Entry." />
+    <parameter name="unreadOnly" description="Id of the Entry." />
+    <parameter name="hours" description="Id of the Entry." />
+    <parameter name="newerThan" description="Id of the Entry." />
+    <parameter name="backfill" description="Id of the Entry." />
+    <parameter name="locale" description="Id of the Entry." />
+
+    <sequence>
+        <property name="uri.var.id" expression="$func:streamId" />
+
+        <property name="feedly.streamId"
+                  expression="fn:concat('feed/', get-property('uri.var.id'))" />
+
+        <script language="js"><![CDATA[
+
+            var streamId = encodeURIComponent(mc.getProperty('feedly.streamId'));
+            mc.setProperty('uri.var.streamId', streamId);
+
+         ]]></script>
+
+        <script language="js">
+            <![CDATA[
+
+			var entries = ''+mc.getProperty('uri.var.entryId');
+			var entriesObj = eval ("(" + entries + ")");
+
+            var query = '[';
+            var added = 0;
+            for(var i in entriesObj) {
+                var temp = entriesObj[i];
+                if(added == 0) {
+                    query = query + '"'+temp+'"';
+                    added = 1;
+                }else {
+                    query = query + ',"'+temp+'"';
+                }
+            }
+
+            query = query + ']';
+            mc.setProperty('uri.var.query', query);
+	 	]]>
+        </script>
+
+        <log level="custom">
+            <property name="entries" expression="get-property('uri.var.query')"/>
+        </log>
+
+
+        <call>
+            <endpoint>
+                <http method="get"
+                      uri-template="http://cloud.feedly.com/v3/mixes/{uri.var.streamId}/contents" />
+            </endpoint>
+        </call>
+    </sequence>
+</template>

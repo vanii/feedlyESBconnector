@@ -1,23 +1,23 @@
-<template name="getDynamicEntry" xmlns="http://ws.apache.org/ns/synapse">
-    <parameter name="entryId" description="Id of the Entry." />
+<template name="getMetadataForListOfFeeds" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter name="feedIds" description="ids of feeds." />
     <sequence>
-        <property name="uri.var.entryId" expression="$func:entryId" />
+        <property name="uri.var.feedIds" expression="$func:feedIds" />
 
         <script language="js">
             <![CDATA[
 
-			var entries = ''+mc.getProperty('uri.var.entryId');
-			var entriesObj = eval ("(" + entries + ")");
+			var feeds = ''+mc.getProperty('uri.var.feedIds');
+			var feedsObj = eval ("(" + feeds + ")");
 
             var query = '[';
             var added = 0;
-            for(var i in entriesObj) {
-                var temp = entriesObj[i];
+            for(var i in feedsObj) {
+                var temp = feedsObj[i];
                 if(added == 0) {
-                    query = query + '"'+temp+'"';
+                    query = query + '"feed/'+temp+'"';
                     added = 1;
                 }else {
-                    query = query + ',"'+temp+'"';
+                    query = query + ',"feed/'+temp+'"';
                 }
             }
 
@@ -27,7 +27,7 @@
         </script>
 
         <log level="custom">
-            <property name="entries" expression="get-property('uri.var.query')"/>
+            <property name="feeds" expression="get-property('uri.var.feedIds')"/>
         </log>
 
         <header name="Content-Type" value="application/json"
@@ -48,7 +48,7 @@
         <call>
             <endpoint>
                 <http method="post"
-                      uri-template="{uri.var.apiUrl}/v3/entries/.mget" />
+                      uri-template="http://cloud.feedly.com/v3/feeds/.mget" />
             </endpoint>
         </call>
     </sequence>

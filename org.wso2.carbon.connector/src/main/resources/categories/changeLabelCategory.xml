@@ -19,7 +19,7 @@
 					var message = mc.getProperty('feedly.categoryId');
 					var encoded = encodeURIComponent(encodeURIComponent(message));
 
-					mc.setProperty('id', encoded);
+					mc.setProperty('uri.var.id', encoded);
 
 
         		 ]]></script>

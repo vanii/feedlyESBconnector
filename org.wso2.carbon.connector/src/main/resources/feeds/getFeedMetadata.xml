@@ -1,0 +1,28 @@
+<template name="getFeedMetadata" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter name="feedId" description="id of the feed." />
+    <sequence>
+        <property name="uri.var.feedId" expression="$func:feedId" />
+
+        <property name="feedly.feedId"
+                  expression="fn:concat('feed/', get-property('uri.var.feedId'))" />
+
+        <script language="js"><![CDATA[
+
+            var feedId = encodeURIComponent(mc.getProperty('feedly.feedId'));
+            mc.setProperty('uri.var.id', feedId);
+
+         ]]></script>
+
+        <log level="custom">
+            <property name="feedID" expression="get-property('uri.var.id')"/>
+        </log>
+
+
+        <call>
+            <endpoint>
+                <http method="get"
+                      uri-template="http://cloud.feedly.com/v3/feeds/{uri.var.id}" />
+            </endpoint>
+        </call>
+    </sequence>
+</template>

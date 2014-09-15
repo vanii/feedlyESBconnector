@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="feedly_getMetadataForListOfFeeds"
+       transports="https,http"
+       statistics="disable"
+       trace="disable"
+       startOnLoad="true">
+    <target>
+        <inSequence>
+            <property name="feedIds" expression="json-eval($.)"/>
+            <feedly.getMetadataForListOfFeeds>
+                <feedIds>{$ctx:feedIds}</feedIds>
+            </feedly.getMetadataForListOfFeeds>
+            <respond/>
+        </inSequence>
+        <outSequence>
+            <log/>
+            <send/>
+        </outSequence>
+    </target>
+    <description/>
+</proxy>

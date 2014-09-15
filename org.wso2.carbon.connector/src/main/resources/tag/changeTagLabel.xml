@@ -1,12 +1,49 @@
 <template name="changeTagLabel" xmlns="http://ws.apache.org/ns/synapse">
-    <parameter name="searchQuery" description="Full-text search query string." />
+    <parameter name="tagId" description="Id of a tag.eg: user/" />
+    <parameter name="label" description="The name of the label that needs to be changed." />
+
     <sequence>
-        <property name="uri.var.searchQuery" expression="$func:searchQuery" />
+        <property name="uri.var.tagId" expression="$func:tagId" />
+        <property name="uri.var.label" expression="$func:label" />
+
+        <script language="js">
+            <![CDATA[
+
+            var query = 'user%2F'+mc.getProperty('uri.var.userId')+'%2Ftag%2F' +mc.getProperty('uri.var.tagId');
+
+			mc.setProperty('uri.var.query', query);
+
+	 	]]>
+        </script>
+
+        <log level="custom">
+            <property name="json" expression="get-property('uri.var.query')"/>
+        </log>
+
+        <header name="Content-Type" value="application/json"
+                scope="transport" />
+        <property name="messageType" value="application/json"
+                  scope="axis2" />
+
+
+        <payloadFactory media-type="json">
+            <format>
+                {
+                "label":"$1"
+                }
+            </format>
+            <args>
+                <arg expression="get-property('uri.var.label')" />
+            </args>
+        </payloadFactory>
+
+
         <call>
             <endpoint>
-                <http method="get"
-                      uri-template="https://www.googleapis.com/books/v1/volumes?q={uri.var.searchQuery}" />
+                <http method="post"
+                      uri-template="{uri.var.apiUrl}/v3/tags/{uri.var.query}" />
             </endpoint>
         </call>
+
     </sequence>
 </template>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="feedly_mixes" type="synapse/template" >
+    <subComponents>
+        <component name="getEngagingContentInStream">
+            <file>getEngagingContentInStream.xml</file>
+            <description>Get most engaging content in a stream.</description>
+        </component>
+    </subComponents>
+</component>
