@@ -1,0 +1,95 @@
+<template name="getContentOfStream" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter name="streamId" description="Id of the Entry." />
+    <parameter name="count" description="default is 20" />
+    <parameter name="ranked" description="newest or oldest" />
+    <parameter name="unreadOnly" description="Optional boolean default value is false." />
+    <parameter name="newerThan" description="long timestamp in ms." />
+    <parameter name="continuation" description="a continuation id is used to page through the entry ids." />
+
+    <sequence>
+        <property name="uri.var.id" expression="$func:streamId" />
+        <property name="uri.var.count" expression="$func:count" />
+        <property name="uri.var.ranked" expression="$func:ranked" />
+        <property name="uri.var.unreadOnly" expression="$func:unreadOnly" />
+        <property name="uri.var.newerThan" expression="$func:newerThan" />
+        <property name="uri.var.continuation" expression="$func:continuation" />
+
+        <property name="feedly.streamId"
+                  expression="fn:concat('user/', get-property('uri.var.userId'),'/category/',get-property('uri.var.id'))" />
+
+        <script language="js"><![CDATA[
+
+            var count = mc.getProperty('uri.var.count');
+			var unreadOnly = mc.getProperty('uri.var.unreadOnly');
+			var ranked = mc.getProperty('uri.var.ranked');
+			var newerThan = mc.getProperty('uri.var.newerThan');
+			var continuation = mc.getProperty('uri.var.continuation');
+
+			var stream = encodeURIComponent(mc.getProperty('feedly.streamId'));
+			mc.setProperty('uri.var.streamId', stream);
+
+			var added = 0;
+            var query = "";
+
+			if (count != null && count != "") {
+				if(Boolean(added)) {
+			        query = query + '&amp;count='+count;
+			    }else {
+			        query = query + 'count='+count;
+			        added = 1;
+			    }
+			}
+
+			if (unreadOnly != null && unreadOnly != "") {
+				if(Boolean(added)) {
+			        query = query + '&amp;unreadOnly='+unreadOnly;
+			    }else {
+			        query = query + 'unreadOnly='+unreadOnly;
+			        added = 1;
+			    }
+			}
+
+			if (newerThan != null && newerThan != "") {
+				if(Boolean(added)) {
+			        query = query + '&amp;newerThan='+newerThan;
+			    }else {
+			        query = query + 'newerThan='+newerThan;
+			        added = 1;
+			    }
+			}
+
+			if (ranked != null && ranked != "") {
+				if(Boolean(added)) {
+			        query = query + '&amp;ranked='+ranked;
+			    }else {
+			        query = query + 'ranked='+ranked;
+			        added = 1;
+			    }
+			}
+
+			if (continuation != null && continuation != "") {
+				if(Boolean(added)) {
+			        query = query + '&amp;continuation='+continuation;
+			    }else {
+			        query = query + 'continuation='+continuation;
+			        added = 1;
+			    }
+			}
+
+			mc.setProperty('uri.var.params', query);
+
+         ]]></script>
+
+        <log level="custom">
+            <property name="params" expression="get-property('uri.var.params')"/>
+        </log>
+
+
+        <call>
+            <endpoint>
+                <http method="get"
+                      uri-template="http://cloud.feedly.com/v3/streams/{uri.var.streamId}/contents?{uri.var.params}" />
+            </endpoint>
+        </call>
+    </sequence>
+</template>

@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="feedly_mixes" type="synapse/template" >
     <subComponents>
-        <component name="getEngagingContentInStream">
-            <file>getEngagingContentInStream.xml</file>
+        <component name="getEngagingContentInFeedStream">
+            <file>getEngagingContentInFeedStream.xml</file>
             <description>Get most engaging content in a stream.</description>
+        </component>
+        <component name="getEngagingContentInCategoryStream">
+            <file>getEngagingContentInCategoryStream.xml</file>
+            <description>Get most engaging content in a Category stream.</description>
         </component>
     </subComponents>
 </component>

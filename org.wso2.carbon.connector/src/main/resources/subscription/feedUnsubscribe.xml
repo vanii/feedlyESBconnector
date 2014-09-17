@@ -12,7 +12,7 @@
             var id = mc.getProperty('uri.var.feedId');
             var encoded = encodeURIComponent(id);
 
-            mc.setProperty('id', encoded);
+            mc.setProperty('uri.var.id', encoded);
 
 
          ]]></script>
@@ -24,7 +24,7 @@
         <call>
             <endpoint>
                 <http method="delete"
-                      uri-template="{uri.var.apiUrl}/v3/subscriptions/feed%252f{uri.var.feedId}" />
+                      uri-template="{uri.var.apiUrl}/v3/subscriptions/{uri.var.id}" />
             </endpoint>
         </call>
 

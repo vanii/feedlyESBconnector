@@ -9,9 +9,9 @@
         <script language="js"><![CDATA[
 
             var message = mc.getProperty('feedly.topicId');
-            var encoded = encodeURIComponent(encodeURIComponent(message));
+            var encoded = encodeURIComponent(message);
 
-            mc.setProperty('id', encoded);
+            mc.setProperty('uri.var.id', encoded);
 
 
          ]]></script>

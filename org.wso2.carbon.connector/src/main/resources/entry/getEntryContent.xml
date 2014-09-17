@@ -11,7 +11,7 @@
         <call>
             <endpoint>
                 <http method="get"
-                      uri-template="{uri.var.apiUrl}/v3/entries/{uri.var.entryId}" />
+                      uri-template="http://cloud.feedly.com/v3/entries/{uri.var.entryId}" />
             </endpoint>
         </call>
     </sequence>

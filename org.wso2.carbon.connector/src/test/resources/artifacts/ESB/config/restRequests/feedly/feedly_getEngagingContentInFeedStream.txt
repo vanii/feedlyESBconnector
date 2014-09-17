@@ -1,0 +1,3 @@
+{
+  "feedId":"http://feeds.engadget.com/weblogsinc/engadget"
+}

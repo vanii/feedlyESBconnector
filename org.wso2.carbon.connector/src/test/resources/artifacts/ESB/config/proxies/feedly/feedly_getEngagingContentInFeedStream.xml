@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="feedly_getEngagingContentInFeedStream"
+       transports="https,http"
+       statistics="disable"
+       trace="disable"
+       startOnLoad="true">
+    <target>
+        <inSequence>
+            <property name="feedId" expression="json-eval($.feedId)"/>
+            <property name="count" expression="json-eval($.count)"/>
+            <property name="unreadOnly" expression="json-eval($.unreadOnly)"/>
+            <property name="hours" expression="json-eval($.hours)"/>
+            <property name="newerThan" expression="json-eval($.newerThan)"/>
+            <property name="backfill" expression="json-eval($.backfill)"/>
+            <property name="locale" expression="json-eval($.locale)"/>
+            <feedly.getEngagingContentInStream>
+                <streamId>{$ctx:feedId}</streamId>
+                <count>{$ctx:count}</count>
+                <unreadOnly>{$ctx:unreadOnly}</unreadOnly>
+                <hours>{$ctx:hours}</hours>
+                <newerThan>{$ctx:newerThan}</newerThan>
+                <backfill>{$ctx:backfill}</backfill>
+                <locale>{$ctx:locale}</locale>
+            </feedly.getEngagingContentInStream>
+            <respond/>
+        </inSequence>
+        <outSequence>
+            <log/>
+            <send/>
+        </outSequence>
+    </target>
+    <description/>
+</proxy>

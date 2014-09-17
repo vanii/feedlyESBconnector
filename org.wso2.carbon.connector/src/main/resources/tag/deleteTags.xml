@@ -1,11 +1,42 @@
 <template name="deleteTags" xmlns="http://ws.apache.org/ns/synapse">
-    <parameter name="searchQuery" description="Full-text search query string." />
+    <parameter name="tagId" description="Id of a tag.eg: user/" />
     <sequence>
-        <property name="uri.var.searchQuery" expression="$func:searchQuery" />
+        <property name="uri.var.tagId" expression="$func:tagId" />
+
+        <script language="js">
+            <![CDATA[
+
+			var tags = '{"tags":' + mc.getProperty('uri.var.tagId') + '}';
+
+            var query = "";
+
+			if (mc.getProperty('uri.var.tagId') != null && mc.getProperty('uri.var.tagId') != "") {
+
+                var tagsObj = eval ("(" + tags + ")");
+
+                var count = 0;
+			    for (var key in tagsObj.tags) {
+                    if (tagsObj.tags.hasOwnProperty(key)) {
+                        if(count == 0 ) {
+                            query = query + 'user%2F'+mc.getProperty('uri.var.userId')+'%2Ftag%2F' + tagsObj.tags[key].id;
+                            count =1;
+                        }else {
+                            query = query + ',user%2F'+mc.getProperty('uri.var.userId')+'%2Ftag%2F' + tagsObj.tags[key].id;
+                        }
+
+                    }
+                }
+
+			}
+			mc.setProperty('uri.var.query', query);
+
+	 	]]>
+        </script>
+
         <call>
             <endpoint>
-                <http method="get"
-                      uri-template="https://www.googleapis.com/books/v1/volumes?q={uri.var.searchQuery}" />
+                <http method="delete"
+                      uri-template="{uri.var.apiUrl}/v3/tags/{uri.var.query}" />
             </endpoint>
         </call>
     </sequence>

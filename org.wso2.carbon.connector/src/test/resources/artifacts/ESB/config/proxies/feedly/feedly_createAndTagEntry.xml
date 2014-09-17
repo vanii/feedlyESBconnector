@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="feedly_createAndTagEntry"
+       transports="https,http"
+       statistics="disable"
+       trace="disable"
+       startOnLoad="true">
+    <target>
+        <inSequence>
+            <property name="accessToken" expression="json-eval($.accessToken)"/>
+            <property name="keywords" expression="json-eval($.keywords)"/>
+            <property name="tags" expression="json-eval($.tags)"/>
+            <property name="alternate" expression="json-eval($.alternate)"/>
+            <property name="title" expression="json-eval($.title)"/>
+            <property name="author" expression="json-eval($.author)"/>
+            <property name="origin" expression="json-eval($.origin)"/>
+            <property name="content" expression="json-eval($.content)"/>
+            <feedly.test_init>
+                <accessToken>{$ctx:accessToken}</accessToken>
+            </feedly.test_init>
+            <feedly.createAndTagEntry>
+                <keywords>{$ctx:keywords}</keywords>
+                <tags>{$ctx:tags}</tags>
+                <alternate>{$ctx:alternate}</alternate>
+                <title>{$ctx:title}</title>
+                <author>{$ctx:author}</author>
+                <origin>{$ctx:origin}</origin>
+                <content>{$ctx:content}</content>
+            </feedly.createAndTagEntry>
+            <respond/>
+        </inSequence>
+        <outSequence>
+            <log/>
+            <send/>
+        </outSequence>
+    </target>
+    <description/>
+</proxy>

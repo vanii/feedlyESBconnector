@@ -1,4 +1,4 @@
-<template name="createTagEntry" xmlns="http://ws.apache.org/ns/synapse">
+<template name="createAndTagEntry" xmlns="http://ws.apache.org/ns/synapse">
     <parameter name="keywords" description="OPTIONAL" />
     <parameter name="tags" description="OPTIONAL" />
     <parameter name="alternate" description="OPTIONAL" />
@@ -103,13 +103,13 @@
             </args>
         </payloadFactory>
 
-        <!--
+
         <call>
             <endpoint>
                 <http method="post"
                       uri-template="{uri.var.apiUrl}/v3/entries/" />
             </endpoint>
         </call>
-        -->
+
     </sequence>
 </template>

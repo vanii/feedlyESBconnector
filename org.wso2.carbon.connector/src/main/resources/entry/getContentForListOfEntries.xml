@@ -1,4 +1,4 @@
-<template name="getDynamicEntry" xmlns="http://ws.apache.org/ns/synapse">
+<template name="getContentForListOfEntries" xmlns="http://ws.apache.org/ns/synapse">
     <parameter name="entryId" description="Id of the Entry." />
     <sequence>
         <property name="uri.var.entryId" expression="$func:entryId" />
@@ -48,7 +48,7 @@
         <call>
             <endpoint>
                 <http method="post"
-                      uri-template="{uri.var.apiUrl}/v3/entries/.mget" />
+                      uri-template="http://cloud.feedly.com/v3/entries/.mget" />
             </endpoint>
         </call>
     </sequence>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="feedly_getContentOfStream"
+       transports="https,http"
+       statistics="disable"
+       trace="disable"
+       startOnLoad="true">
+    <target>
+        <inSequence>
+            <property name="accessToken" expression="json-eval($.accessToken)"/>
+            <property name="categoryId" expression="json-eval($.categoryId)"/>
+            <property name="count" expression="json-eval($.count)"/>
+            <property name="ranked" expression="json-eval($.ranked)"/>
+            <property name="unreadOnly" expression="json-eval($.unreadOnly)"/>
+            <property name="newerThan" expression="json-eval($.newerThan)"/>
+            <property name="continuation" expression="json-eval($.continuation)"/>
+            <feedly.test_init>
+                <accessToken>{$ctx:accessToken}</accessToken>
+            </feedly.test_init>
+            <feedly.getContentOfStream>
+                <streamId>{$ctx:categoryId}</streamId>
+                <count>{$ctx:count}</count>
+                <ranked>{$ctx:ranked}</ranked>
+                <unreadOnly>{$ctx:unreadOnly}</unreadOnly>
+                <newerThan>{$ctx:newerThan}</newerThan>
+                <continuation>{$ctx:continuation}</continuation>
+            </feedly.getContentOfStream>
+            <respond/>
+        </inSequence>
+        <outSequence>
+            <log/>
+            <send/>
+        </outSequence>
+    </target>
+    <description/>
+</proxy>

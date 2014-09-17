@@ -1,12 +1,34 @@
-<template name="listVolume" xmlns="http://ws.apache.org/ns/synapse">
-    <parameter name="searchQuery" description="Full-text search query string." />
+<template name="importOPML" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter name="opml" description="opml file content" />
+
     <sequence>
-        <property name="uri.var.searchQuery" expression="$func:searchQuery" />
+        <property name="uri.var.opml" expression="$func:opml" />
+
+        <log level="custom">
+            <property name="opml" expression="get-property('uri.var.opml')"/>
+        </log>
+
+        <header name="Content-Type" value="text/xml"
+                scope="transport" />
+        <property name="messageType" value="text/xml"
+                  scope="axis2" />
+
+        <!--
+        <payloadFactory media-type="xml">
+            <format>
+                $1
+            </format>
+            <args>
+                <arg expression="get-property('uri.var.opml')" />
+            </args>
+        </payloadFactory>
+
+
         <call>
             <endpoint>
-                <http method="get"
-                      uri-template="https://www.googleapis.com/books/v1/volumes?q={uri.var.searchQuery}" />
+                <http method="post"
+                      uri-template="{uri.var.apiUrl}/v3/opml" />
             </endpoint>
-        </call>
+        </call>-->
     </sequence>
 </template>

@@ -1,11 +1,21 @@
 <template name="updatePreference" xmlns="http://ws.apache.org/ns/synapse">
-    <parameter name="searchQuery" description="Full-text search query string." />
+    <parameter name="preference" description="List of preferences." />
     <sequence>
-        <property name="uri.var.searchQuery" expression="$func:searchQuery" />
+        <property name="uri.var.preference" expression="$func:preference" />
+
+        <payloadFactory media-type="json">
+            <format>
+                $1
+            </format>
+            <args>
+                <arg expression="get-property('uri.var.preference')" />
+            </args>
+        </payloadFactory>
+
         <call>
             <endpoint>
-                <http method="get"
-                      uri-template="https://www.googleapis.com/books/v1/volumes?q={uri.var.searchQuery}" />
+                <http method="post"
+                      uri-template="{uri.var.apiUrl}/v3/preferences" />
             </endpoint>
         </call>
     </sequence>

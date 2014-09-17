@@ -5,12 +5,12 @@
             <file>getEntryContent.xml</file>
             <description>List the contents for an entry.</description>
         </component>
-        <component name="getDynamicEntry">
-            <file>getDynamicEntry.xml</file>
+        <component name="getContentForListOfEntries">
+            <file>getContentForListOfEntries.xml</file>
             <description>List the contents for a dynamic list of entries.</description>
         </component>
-        <component name="createTagEntry">
-            <file>createTagEntry.xml</file>
+        <component name="createAndTagEntry">
+            <file>createAndTagEntry.xml</file>
             <description>Create and tag an entry</description>
         </component>
     </subComponents>
