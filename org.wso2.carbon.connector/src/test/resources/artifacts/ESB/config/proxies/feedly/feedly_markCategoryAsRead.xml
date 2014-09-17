@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="feedly_markCategoryAsRead"
+       transports="https,http"
+       statistics="disable"
+       trace="disable"
+       startOnLoad="true">
+    <target>
+        <inSequence>
+            <property name="accessToken" expression="json-eval($.accessToken)"/>
+            <property name="categoryIds" expression="json-eval($.categoryIds)"/>
+            <property name="lastReadEntryId" expression="json-eval($.lastReadEntryId)"/>
+            <property name="action" expression="json-eval($.action)"/>
+            <feedly.test_init>
+                <accessToken>{$ctx:accessToken}</accessToken>
+            </feedly.test_init>
+            <feedly.markCategoryAsRead>
+                <action>{$ctx:action}</action>
+                <categoryIds>{$ctx:categoryIds}</categoryIds>
+                <lastReadEntryId>{$ctx:lastReadEntryId}</lastReadEntryId>
+            </feedly.markCategoryAsRead>
+            <respond/>
+        </inSequence>
+        <outSequence>
+            <log/>
+            <send/>
+        </outSequence>
+    </target>
+    <description/>
+</proxy>

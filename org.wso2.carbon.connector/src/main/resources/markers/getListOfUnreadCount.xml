@@ -1,0 +1,87 @@
+<template name="getListOfUnreadCount" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter name="autoRefresh" description="auto-refresh this is a background auto-refresh or not." />
+    <parameter name="newerThan" description="used as a lower time limit" />
+    <parameter name="streamId" description="the unread count response to feeds " />
+
+    <sequence>
+        <property name="uri.var.autoRefresh" expression="$func:autoRefresh" />
+        <property name="uri.var.newerThan" expression="$func:newerThan" />
+        <property name="uri.var.streamId" expression="$func:streamId" />
+
+        <script language="js">
+            <![CDATA[
+
+			var autoRefresh = mc.getProperty('uri.var.autoRefresh');
+			var newerThan = mc.getProperty('uri.var.newerThan');
+			var streamId = mc.getProperty('uri.var.streamId');
+
+			var added = 0;
+            var query = "";
+
+			if (autoRefresh != null && autoRefresh != "") {
+				if(Boolean(added)) {
+			        query = query + '&amp;autorefresh='+autoRefresh;
+			    }else {
+			        query = query + 'autorefresh='+autoRefresh;
+			        added = 1;
+			    }
+			}else {
+			    if(Boolean(added)) {
+			        query = query + '&amp;autorefresh=true';
+			    }else {
+			        query = query + 'autorefresh=true';
+			        added = 1;
+			    }
+			}
+
+			if (newerThan != null && newerThan != "") {
+				if(Boolean(added)) {
+			        query = query + '&amp;newerThan='+newerThan;
+			    }else {
+			        query = query + 'newerThan='+newerThan;
+			        added = 1;
+			    }
+			}else {
+			    if(Boolean(added)) {
+			        query = query + '&amp;newerThan=1367539068016';
+			    }else {
+			        query = query + 'newerThan=1367539068016';
+			        added = 1;
+			    }
+			}
+
+			if (streamId != null && streamId != "") {
+				if(Boolean(added)) {
+			        query = query + '&amp;streamId=user/'+mc.getProperty('uri.var.userId')+'/category/'+streamId;
+			    }else {
+			        query = query + '&amp;streamId=user/'+mc.getProperty('uri.var.userId')+'/category/'+streamId;
+			        added = 1;
+			    }
+			}else {
+			    if(Boolean(added)) {
+			        query = query + '&amp;streamId=user/'+mc.getProperty('uri.var.userId')+'/category/global.all';
+			    }else {
+			        query = query + '&amp;streamId=user/'+mc.getProperty('uri.var.userId')+'/category/global.all';
+			        added = 1;
+			    }
+			}
+
+
+			mc.setProperty('uri.var.params', query);
+
+	 	]]>
+        </script>
+
+        <log level="custom">
+            <property name="requestMethod" expression="get-property('uri.var.params')"/>
+        </log>
+
+
+        <call>
+            <endpoint>
+                <http method="get"
+                      uri-template="{uri.var.apiUrl}/v3/markers/counts?{uri.var.params}" />
+            </endpoint>
+        </call>
+    </sequence>
+</template>

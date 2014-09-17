@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="feedly_getListOfUnreadCount"
+       transports="https,http"
+       statistics="disable"
+       trace="disable"
+       startOnLoad="true">
+    <target>
+        <inSequence>
+            <property name="accessToken" expression="json-eval($.accessToken)"/>
+            <property name="autoRefresh" expression="json-eval($.autoRefresh)"/>
+            <property name="newerThan" expression="json-eval($.newerThan)"/>
+            <property name="streamId" expression="json-eval($.streamId)"/>
+            <feedly.test_init>
+                <accessToken>{$ctx:accessToken}</accessToken>
+            </feedly.test_init>
+            <feedly.getListOfUnreadCount>
+                <autoRefresh>{$ctx:autoRefresh}</autoRefresh>
+                <newerThan>{$ctx:newerThan}</newerThan>
+                <streamId>{$ctx:streamId}</streamId>
+            </feedly.getListOfUnreadCount>
+            <respond/>
+        </inSequence>
+        <outSequence>
+            <log/>
+            <send/>
+        </outSequence>
+    </target>
+    <description/>
+</proxy>

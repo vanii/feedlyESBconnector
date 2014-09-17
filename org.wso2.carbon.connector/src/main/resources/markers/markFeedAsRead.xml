@@ -1,0 +1,41 @@
+<template name="markFeedAsRead" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter name="action" description="used as a lower time limit" />
+    <parameter name="feedIds" description="used as a lower time limit" />
+    <parameter name="lastReadEntryId" description="used as a lower time limit" />
+
+    <sequence>
+        <property name="uri.var.action" expression="$func:action" />
+        <property name="uri.var.feedIds" expression="$func:feedIds" />
+        <property name="uri.var.lastReadEntryId" expression="$func:lastReadEntryId" />
+
+        <header name="Content-Type" value="application/json"
+                scope="transport" />
+        <property name="messageType" value="application/json"
+                  scope="axis2" />
+
+
+        <payloadFactory media-type="json">
+            <format>
+                {
+                    "action" : "$1",
+                    "type": "feeds",
+                    "lastReadEntryId" : "$2",
+                    "feedIds" : $3
+                }
+            </format>
+            <args>
+                <arg expression="get-property('uri.var.action')" />
+                <arg expression="get-property('uri.var.lastReadEntryId')" />
+                <arg expression="get-property('uri.var.feedIds')" />
+            </args>
+        </payloadFactory>
+
+        <call>
+            <endpoint>
+                <http method="post"
+                      uri-template="{uri.var.apiUrl}/v3/markers" />
+            </endpoint>
+        </call>
+
+    </sequence>
+</template>

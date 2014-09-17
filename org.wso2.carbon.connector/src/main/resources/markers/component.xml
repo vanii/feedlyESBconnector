@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="feedly_markers" type="synapse/template">
     <subComponents>
+        <component name="getListOfUnreadCount">
+            <file>getListOfUnreadCount.xml</file>
+            <description>List the list of unread counts.</description>
+        </component>
+        <component name="markArticleAsRead">
+            <file>markArticleAsRead.xml</file>
+            <description>Mark one or multiple articles as read.</description>
+        </component>
+        <component name="markArticleAsUnread">
+            <file>markArticleAsUnread.xml</file>
+            <description>Mark one or multiple articles as read.</description>
+        </component>
+        <component name="markFeedAsRead">
+            <file>markFeedAsRead.xml</file>
+            <description>Mark a feed as read.</description>
+        </component>
+        <component name="markCategoryAsRead">
+            <file>markCategoryAsRead.xml</file>
+            <description>Mark a category as read.</description>
+        </component>
+        <!--
         <component name="getLatestReadOperations">
             <file>getLatestReadOperations.xml</file>
             <description>List the latest read operations.</description>
@@ -8,19 +29,11 @@
         <component name="getLatestTagEntryId">
             <file>getLatestTagEntryId.xml</file>
             <description>List the latest tagged entry ids.</description>
-        </component>
-        <component name="getListUnreadCount">
-            <file>getListUnreadCount.xml</file>
-            <description>List the list of unread counts.</description>
-        </component>
-        <component name="keepArticleRead">
+        </component><component name="keepArticleRead">
         <file>keepArticleRead.xml</file>
         <description>Keep one or multiple articles as unread.</description>
         </component>
-        <component name="markArticleRead">
-            <file>markArticleRead.xml</file>
-            <description>Mark one or multiple articles as read.</description>
-        </component>
+
         <component name="markArticleSave">
             <file>markArticleSave.xml</file>
             <description>Mark one or multiple articles as saved.</description>
@@ -29,17 +42,12 @@
             <file>markArticleUnsave.xml</file>
             <description>Mark one or multiple articles as unsaved.</description>
         </component>
-        <component name="markCategoryRead">
-            <file>markCategoryRead.xml</file>
-            <description>Mark a category as read.</description>
-        </component>
-        <component name="markFeedRead">
-            <file>markFeedRead.xml</file>
-            <description>Mark a feed as read.</description>
-        </component>
+
+
         <component name="undoMarkRead">
             <file>undoMarkRead.xml</file>
             <description>Undo mark as read.</description>
         </component>
+        -->
     </subComponents>
 </component>

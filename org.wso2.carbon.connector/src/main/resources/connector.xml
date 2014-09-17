@@ -7,7 +7,7 @@
         <dependency component="feedly_entry"/>
         <dependency component="feedly_config"/>
         <dependency component="feedly_feeds"/>
-        <!--<dependency component="feedly_markers"/>-->
+        <dependency component="feedly_markers"/>
         <dependency component="feedly_mixes"/>
         <dependency component="feedly_opml"/>
         <dependency component="feedly_preferences"/>
