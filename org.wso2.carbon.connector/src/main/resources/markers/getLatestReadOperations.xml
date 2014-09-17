@@ -1,11 +1,11 @@
-<template name="getLatestTagEntryId" xmlns="http://ws.apache.org/ns/synapse">
-    <parameter name="searchQuery" description="Full-text search query string." />
+<template name="getLatestReadOperations" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter name="newerThan" description="Timestamp in ms. Default is 30 days." />
     <sequence>
-        <property name="uri.var.searchQuery" expression="$func:searchQuery" />
+        <property name="uri.var.newerThan" expression="$func:newerThan" />
         <call>
             <endpoint>
                 <http method="get"
-                      uri-template="https://www.googleapis.com/books/v1/volumes?q={uri.var.searchQuery}" />
+                      uri-template="{uri.var.apiUrl}/v3/markers/reads" />
             </endpoint>
         </call>
     </sequence>

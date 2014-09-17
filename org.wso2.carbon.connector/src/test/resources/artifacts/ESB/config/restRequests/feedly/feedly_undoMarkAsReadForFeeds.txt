@@ -1,0 +1,8 @@
+{
+  "accessToken":"%s",
+  "action": "undoMarkAsRead",
+  "type": "feeds",
+  "feedIds": [
+    "http://feeds.feedburner.com/design-milk"
+  ]
+}

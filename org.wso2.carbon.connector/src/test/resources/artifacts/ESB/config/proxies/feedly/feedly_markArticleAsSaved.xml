@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="feedly_markArticleAsSaved"
+       transports="https,http"
+       statistics="disable"
+       trace="disable"
+       startOnLoad="true">
+    <target>
+        <inSequence>
+            <property name="accessToken" expression="json-eval($.accessToken)"/>
+            <property name="action" expression="json-eval($.action)"/>
+            <property name="entryIds" expression="json-eval($.entryIds)"/>
+            <feedly.test_init>
+                <accessToken>{$ctx:accessToken}</accessToken>
+            </feedly.test_init>
+            <feedly.markArticleAsSaved>
+                <action>{$ctx:action}</action>
+                <entryIds>{$ctx:entryIds}</entryIds>
+            </feedly.markArticleAsSaved>
+            <respond/>
+        </inSequence>
+        <outSequence>
+            <log/>
+            <send/>
+        </outSequence>
+    </target>
+    <description/>
+</proxy>

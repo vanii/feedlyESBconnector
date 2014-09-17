@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="feedly_undoMarkAsRead"
+       transports="https,http"
+       statistics="disable"
+       trace="disable"
+       startOnLoad="true">
+    <target>
+        <inSequence>
+            <property name="accessToken" expression="json-eval($.accessToken)"/>
+            <property name="categoryIds" expression="json-eval($.categoryIds)"/>
+            <property name="feedIds" expression="json-eval($.feedIds)"/>
+            <property name="action" expression="json-eval($.action)"/>
+            <property name="type" expression="json-eval($.type)"/>
+            <feedly.test_init>
+                <accessToken>{$ctx:accessToken}</accessToken>
+            </feedly.test_init>
+            <feedly.undoMarkAsRead>
+                <action>{$ctx:action}</action>
+                <type>{$ctx:type}</type>
+                <categoryIds>{$ctx:categoryIds}</categoryIds>
+                <feedIds>{$ctx:feedIds}</feedIds>
+            </feedly.undoMarkAsRead>
+            <respond/>
+        </inSequence>
+        <outSequence>
+            <log/>
+            <send/>
+        </outSequence>
+    </target>
+    <description/>
+</proxy>
