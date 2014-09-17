@@ -2,10 +2,33 @@
     <parameter name="newerThan" description="Timestamp in ms. Default is 30 days." />
     <sequence>
         <property name="uri.var.newerThan" expression="$func:newerThan" />
+
+        <script language="js">
+            <![CDATA[
+
+			var newerThan = mc.getProperty('uri.var.newerThan');
+
+			var added = 0;
+            var query = "";
+
+			if (newerThan != null && newerThan != "") {
+				if(Boolean(added)) {
+			        query = query + '&amp;newerThan='+newerThan;
+			    }else {
+			        query = query + 'newerThan='+newerThan;
+			        added = 1;
+			    }
+			}
+
+			mc.setProperty('uri.var.params', query);
+
+	 	]]>
+        </script>
+
         <call>
             <endpoint>
                 <http method="get"
-                      uri-template="{uri.var.apiUrl}/v3/markers/reads" />
+                      uri-template="{uri.var.apiUrl}/v3/markers/reads?{uri.var.params}" />
             </endpoint>
         </call>
     </sequence>
