@@ -1,4 +1,4 @@
 [
-  "http://feeds.engadget.com/weblogsinc/engadget",
-  "http://www.yatzer.com/feed/index.php"
+  "%s",
+  "%s"
 ]

@@ -2,8 +2,8 @@
   "accessToken":"%s",
   "action": "markAsRead",
   "type": "feeds",
-  "lastReadEntryId": "TSxGHgRh4oAiHxRU9TgPrpYvYVBPjipkmUVSHGYCTY0=_1449255d60a:22c3491:9c6d71ab",
+  "lastReadEntryId": "%s",
   "feedIds": [
-    "feed/http://feeds.feedburner.com/design-milk"
+    "%s"
   ]
 }

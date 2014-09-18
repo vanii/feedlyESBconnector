@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="feedly_feeds" type="synapse/template">
+    <subComponents>
+        <component name="getFeedMetadata">
+            <file>getFeedMetadata.xml</file>
+            <description>Get the metadata for a list of feeds</description>
+        </component>
+        <component name="getMetadataForListOfFeeds">
+            <file>getMetadataForListOfFeeds.xml</file>
+            <description>List the metadata about a specific feed</description>
+        </component>
+    </subComponents>
+</component>

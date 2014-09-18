@@ -8,9 +8,9 @@
     <target>
         <inSequence>
             <property name="entryId" expression="json-eval($.entryId)"/>
-            <feedly.getDynamicEntry>
+            <feedly.getContentForListOfEntries>
                 <entryId>{$ctx:entryId}</entryId>
-            </feedly.getDynamicEntry>
+            </feedly.getContentForListOfEntries>
             <respond/>
         </inSequence>
         <outSequence>

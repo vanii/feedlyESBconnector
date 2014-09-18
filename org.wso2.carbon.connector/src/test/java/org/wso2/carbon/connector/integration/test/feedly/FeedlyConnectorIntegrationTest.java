@@ -77,7 +77,7 @@ public class FeedlyConnectorIntegrationTest extends ESBIntegrationTest {
     /**
      * test case for getProfile method.
      */
-    @Test(groups = { "wso2.esb" }, description = "Feedly {getProfile} integration test.")
+    @Test(groups = { "wso2.esb" },priority = 1, description = "Feedly {getProfile} integration test.")
     public void testGetProfile() throws Exception {
 
         String jsonRequestFilePath = pathToRequestsDirectory + "feedly_getProfile.txt";
@@ -101,7 +101,7 @@ public class FeedlyConnectorIntegrationTest extends ESBIntegrationTest {
     /**
      * test case for updateProfile method.
      */
-    @Test(groups = { "wso2.esb" }, description = "Feedly {updateProfile} integration test.")
+    @Test(groups = { "wso2.esb" },priority = 2, description = "Feedly {updateProfile} integration test.")
     public void testUpdateProfile() throws Exception {
 
         String jsonRequestFilePath = pathToRequestsDirectory + "feedly_updateProfile.txt";
@@ -125,7 +125,7 @@ public class FeedlyConnectorIntegrationTest extends ESBIntegrationTest {
     /**
      * test case for getCategories method.
      */
-    @Test(groups = { "wso2.esb" }, description = "Feedly {getCategories} integration test.")
+    @Test(groups = { "wso2.esb" },priority = 3, description = "Feedly {getCategories} integration test.")
     public void testGetCategories() throws Exception {
 
         String jsonRequestFilePath = pathToRequestsDirectory + "feedly_getCategories.txt";
@@ -149,7 +149,7 @@ public class FeedlyConnectorIntegrationTest extends ESBIntegrationTest {
     /**
      * test case for changeLabelCategory method.
      */
-    @Test(groups = { "wso2.esb" }, description = "Feedly {changeLabelCategory} integration test.")
+    @Test(groups = { "wso2.esb" },priority = 0, description = "Feedly {changeLabelCategory} integration test.")
     public void testChangeLabelCategory() throws Exception {
 
         String jsonRequestFilePath = pathToRequestsDirectory + "feedly_changeLabelCategory.txt";
@@ -167,7 +167,7 @@ public class FeedlyConnectorIntegrationTest extends ESBIntegrationTest {
             int responseHeader = ConnectorIntegrationUtil.sendRequestToRetriveHeaders(getProxyServiceURL(methodName),newJsonString);
 
             System.out.println("\n\n\n\n\n-------*********-------");
-            System.out.println("response"+responseHeader);
+            System.out.println("response"+responseHeader+" object: "+object);
             Assert.assertTrue(responseHeader == 200);
         } finally {
             proxyAdmin.deleteProxy(methodName);
@@ -177,7 +177,7 @@ public class FeedlyConnectorIntegrationTest extends ESBIntegrationTest {
     /**
      * test case for deleteCategory method.
      */
-    @Test(groups = { "wso2.esb" }, description = "Feedly {deleteCategory} integration test.")
+    @Test(groups = { "wso2.esb" },priority = 4, description = "Feedly {deleteCategory} integration test.")
     public void testDeleteCategory() throws Exception {
 
         String jsonRequestFilePath = pathToRequestsDirectory + "feedly_deleteCategory.txt";
@@ -201,7 +201,7 @@ public class FeedlyConnectorIntegrationTest extends ESBIntegrationTest {
     /**
      * test case for getUserSubscription method.
      */
-    @Test(groups = { "wso2.esb" }, description = "Feedly {getUserSubscription} integration test.")
+    @Test(groups = { "wso2.esb" },priority = 5, description = "Feedly {getUserSubscription} integration test.")
     public void testGetUserSubscription() throws Exception {
 
         String jsonRequestFilePath = pathToRequestsDirectory + "feedly_getUserSubscription.txt";
@@ -224,7 +224,7 @@ public class FeedlyConnectorIntegrationTest extends ESBIntegrationTest {
     /**
      * test case for feedSubscribe method.
      */
-    @Test(groups = { "wso2.esb" }, description = "Feedly {feedSubscribe} integration test.")
+    @Test(groups = { "wso2.esb" },priority = 6, description = "Feedly {feedSubscribe} integration test.")
     public void testFeedSubscribe() throws Exception {
 
         String jsonRequestFilePath = pathToRequestsDirectory + "feedly_feedSubscribe.txt";
@@ -245,9 +245,9 @@ public class FeedlyConnectorIntegrationTest extends ESBIntegrationTest {
     }
 
     /**
-     * test case for feedSubscribe method.
+     * test case for feedUnsubscribe method.
      */
-    @Test(groups = { "wso2.esb" }, description = "Feedly {feedUnsubscribe} integration test.")
+    @Test(groups = { "wso2.esb" },priority = 7, description = "Feedly {feedUnsubscribe} integration test.")
     public void testFeedUnsubscribe() throws Exception {
 
         String jsonRequestFilePath = pathToRequestsDirectory + "feedly_feedUnsubscribe.txt";
@@ -268,9 +268,9 @@ public class FeedlyConnectorIntegrationTest extends ESBIntegrationTest {
     }
 
     /**
-     * test case for feedSubscribe method.
+     * test case for updateSubscription method.
      */
-    @Test(groups = { "wso2.esb" }, description = "Feedly {updateSubscription} integration test.")
+    @Test(groups = { "wso2.esb" },priority = 8, description = "Feedly {updateSubscription} integration test.")
     public void testUpdateSubscription() throws Exception {
 
         String jsonRequestFilePath = pathToRequestsDirectory + "feedly_updateSubscription.txt";
@@ -291,9 +291,9 @@ public class FeedlyConnectorIntegrationTest extends ESBIntegrationTest {
     }
 
     /**
-     * test case for feedSubscribe method.
+     * test case for searchFeeds method.
      */
-    @Test(groups = { "wso2.esb" }, description = "Feedly {searchFeeds} integration test.")
+    @Test(groups = { "wso2.esb" },priority = 9, description = "Feedly {searchFeeds} integration test.")
     public void testSearchFeeds() throws Exception {
 
         String jsonRequestFilePath = pathToRequestsDirectory + "feedly_searchFeeds.txt";
@@ -316,7 +316,7 @@ public class FeedlyConnectorIntegrationTest extends ESBIntegrationTest {
     /**
      * test case for getListTopics method.
      */
-    @Test(groups = { "wso2.esb" }, description = "Feedly {getListTopics} integration test.")
+    @Test(groups = { "wso2.esb" },priority = 10, description = "Feedly {getListTopics} integration test.")
     public void testGetListTopics() throws Exception {
 
         String jsonRequestFilePath = pathToRequestsDirectory + "feedly_getListTopics.txt";
@@ -339,7 +339,7 @@ public class FeedlyConnectorIntegrationTest extends ESBIntegrationTest {
     /**
      * test case for addTopic method.
      */
-    @Test(groups = { "wso2.esb" }, description = "Feedly {addTopic} integration test.")
+    @Test(groups = { "wso2.esb" },priority = 11, description = "Feedly {addTopic} integration test.")
     public void testAddTopic() throws Exception {
 
         String jsonRequestFilePath = pathToRequestsDirectory + "feedly_addTopic.txt";
@@ -365,7 +365,7 @@ public class FeedlyConnectorIntegrationTest extends ESBIntegrationTest {
     /**
      * test case for updateTopic method.
      */
-    @Test(groups = { "wso2.esb" }, description = "Feedly {updateTopic} integration test.")
+    @Test(groups = { "wso2.esb" },priority = 12, description = "Feedly {updateTopic} integration test.")
     public void testUpdateTopic() throws Exception {
 
         String jsonRequestFilePath = pathToRequestsDirectory + "feedly_updateTopic.txt";
@@ -391,7 +391,7 @@ public class FeedlyConnectorIntegrationTest extends ESBIntegrationTest {
     /**
      * test case for removeTopic method.
      */
-    @Test(groups = { "wso2.esb" }, description = "Feedly {removeTopic} integration test.")
+    @Test(groups = { "wso2.esb" },priority = 13, description = "Feedly {removeTopic} integration test.")
     public void testRemoveTopic() throws Exception {
 
         String jsonRequestFilePath = pathToRequestsDirectory + "feedly_removeTopic.txt";
@@ -417,7 +417,7 @@ public class FeedlyConnectorIntegrationTest extends ESBIntegrationTest {
     /**
      * test case for getEntryContent method.
      */
-    @Test(groups = { "wso2.esb" }, description = "Feedly {getEntryContent} integration test.")
+    @Test(groups = { "wso2.esb" },priority = 14, description = "Feedly {getEntryContent} integration test.")
     public void testGetEntryContent() throws Exception {
 
         String jsonRequestFilePath = pathToRequestsDirectory + "feedly_getEntryContent.txt";
@@ -433,11 +433,480 @@ public class FeedlyConnectorIntegrationTest extends ESBIntegrationTest {
         try {
             int responseHeader = ConnectorIntegrationUtil.sendRequestToRetriveHeaders(getProxyServiceURL(methodName),newJsonString);
 
-            System.out.println("\n\n\n\n\n-------*********-------");
-            System.out.println("response Entry ID: "+responseHeader);
             Assert.assertTrue(responseHeader == 200);
         } finally {
             proxyAdmin.deleteProxy(methodName);
         }
     }
+
+    /**
+     * test case for getContentForListOfEntries method.
+     */
+    @Test(groups = { "wso2.esb" },priority = 15, description = "Feedly {getContentForListOfEntries} integration test.")
+    public void testGetContentForListOfEntries() throws Exception {
+
+        String jsonRequestFilePath = pathToRequestsDirectory + "feedly_getContentForListOfEntries.txt";
+        String methodName = "feedly_getContentForListOfEntries";
+
+        final String jsonString = ConnectorIntegrationUtil.getFileContent(jsonRequestFilePath);
+        String newJsonString = String.format(jsonString,
+                feedlyConnectorProperties.getProperty("entryIdOne"),
+                feedlyConnectorProperties.getProperty("entryIdTwo"));
+
+        final String proxyFilePath = "file:///" + pathToProxiesDirectory + methodName + ".xml";
+        proxyAdmin.addProxyService(new DataHandler(new URL(proxyFilePath)));
+
+        try {
+            int responseHeader = ConnectorIntegrationUtil.sendRequestToRetriveHeaders(getProxyServiceURL(methodName),newJsonString);
+
+            Assert.assertTrue(responseHeader == 200);
+        } finally {
+            proxyAdmin.deleteProxy(methodName);
+        }
+    }
+
+    /**
+     * test case for createAndTagEntry method.
+     */
+    @Test(groups = { "wso2.esb" },priority = 16, description = "Feedly {createAndTagEntry} integration test.")
+    public void testCreateAndTagEntry() throws Exception {
+
+        String jsonRequestFilePath = pathToRequestsDirectory + "feedly_createAndTagEntryOptional.txt";
+        String methodName = "feedly_createAndTagEntry";
+
+        final String jsonString = ConnectorIntegrationUtil.getFileContent(jsonRequestFilePath);
+        String newJsonString = String.format(jsonString,
+                feedlyConnectorProperties.getProperty("accessToken"));
+
+        final String proxyFilePath = "file:///" + pathToProxiesDirectory + methodName + ".xml";
+        proxyAdmin.addProxyService(new DataHandler(new URL(proxyFilePath)));
+
+        try {
+            int responseHeader = ConnectorIntegrationUtil.sendRequestToRetriveHeaders(getProxyServiceURL(methodName),newJsonString);
+
+            Assert.assertTrue(responseHeader == 200);
+        } finally {
+            proxyAdmin.deleteProxy(methodName);
+        }
+    }
+
+
+    /**
+     * test case for getFeedMetadata method.
+     */
+    @Test(groups = { "wso2.esb" },priority = 17, description = "Feedly {getFeedMetadata} integration test.")
+    public void testGetFeedMetadata() throws Exception {
+
+        String jsonRequestFilePath = pathToRequestsDirectory + "feedly_getFeedMetadata.txt";
+        String methodName = "feedly_getFeedMetadata";
+
+        final String jsonString = ConnectorIntegrationUtil.getFileContent(jsonRequestFilePath);
+        String newJsonString = String.format(jsonString,
+                feedlyConnectorProperties.getProperty("feedId"));
+
+        final String proxyFilePath = "file:///" + pathToProxiesDirectory + methodName + ".xml";
+        proxyAdmin.addProxyService(new DataHandler(new URL(proxyFilePath)));
+
+        try {
+            JSONObject response = ConnectorIntegrationUtil.sendRequest(getProxyServiceURL(methodName),newJsonString);
+
+            Assert.assertTrue(response.has("id"));
+        } finally {
+            proxyAdmin.deleteProxy(methodName);
+        }
+    }
+
+    /**
+     * test case for getMetadataForListOfFeeds method.
+     */
+    @Test(groups = { "wso2.esb" },priority = 18, description = "Feedly {getMetadataForListOfFeeds} integration test.")
+    public void testGetMetadataForListOfFeeds() throws Exception {
+
+        String jsonRequestFilePath = pathToRequestsDirectory + "feedly_getMetadataForListOfFeeds.txt";
+        String methodName = "feedly_getMetadataForListOfFeeds";
+
+        final String jsonString = ConnectorIntegrationUtil.getFileContent(jsonRequestFilePath);
+        String newJsonString = String.format(jsonString,
+                feedlyConnectorProperties.getProperty("feedId"),
+                feedlyConnectorProperties.getProperty("feedIdTwo"));
+
+        final String proxyFilePath = "file:///" + pathToProxiesDirectory + methodName + ".xml";
+        proxyAdmin.addProxyService(new DataHandler(new URL(proxyFilePath)));
+
+        try {
+            int response = ConnectorIntegrationUtil.sendRequestToRetriveHeaders(getProxyServiceURL(methodName),newJsonString);
+
+            Assert.assertTrue(response == 200);
+        } finally {
+            proxyAdmin.deleteProxy(methodName);
+        }
+    }
+
+
+    /**
+     * test case for getListOfUnreadCount method.
+     */
+    @Test(groups = { "wso2.esb" },priority = 19, description = "Feedly {getListOfUnreadCount} integration test.")
+    public void testGetListOfUnreadCount() throws Exception {
+
+        String jsonRequestFilePath = pathToRequestsDirectory + "feedly_getListOfUnreadCount.txt";
+        String methodName = "feedly_getListOfUnreadCount";
+
+        final String jsonString = ConnectorIntegrationUtil.getFileContent(jsonRequestFilePath);
+        String newJsonString = String.format(jsonString,
+                feedlyConnectorProperties.getProperty("accessToken"));
+
+        final String proxyFilePath = "file:///" + pathToProxiesDirectory + methodName + ".xml";
+        proxyAdmin.addProxyService(new DataHandler(new URL(proxyFilePath)));
+
+        try {
+            JSONObject response = ConnectorIntegrationUtil.sendRequest(getProxyServiceURL(methodName),newJsonString);
+
+            Assert.assertTrue(response.has("unreadcounts"));
+        } finally {
+            proxyAdmin.deleteProxy(methodName);
+        }
+    }
+
+    /**
+     * Optional test case for getListOfUnreadCount method.
+     */
+    @Test(groups = { "wso2.esb" },priority = 20, description = "Feedly {getListOfUnreadCountOptional} integration test.")
+    public void testGetListOfUnreadCountOptional() throws Exception {
+
+        String jsonRequestFilePath = pathToRequestsDirectory + "feedly_getListOfUnreadCountOptional.txt";
+        String methodName = "feedly_getListOfUnreadCount";
+
+        final String jsonString = ConnectorIntegrationUtil.getFileContent(jsonRequestFilePath);
+        String newJsonString = String.format(jsonString,
+                feedlyConnectorProperties.getProperty("accessToken"));
+
+        final String proxyFilePath = "file:///" + pathToProxiesDirectory + methodName + ".xml";
+        proxyAdmin.addProxyService(new DataHandler(new URL(proxyFilePath)));
+
+        try {
+            int response = ConnectorIntegrationUtil.sendRequestToRetriveHeaders(getProxyServiceURL(methodName),newJsonString);
+
+            Assert.assertTrue(response == 200);
+        } finally {
+            proxyAdmin.deleteProxy(methodName);
+        }
+    }
+
+    /**
+     * test case for markArticleAsRead method.
+     */
+    @Test(groups = { "wso2.esb" },priority = 21, description = "Feedly {markArticleAsRead} integration test.")
+    public void testMarkArticleAsRead() throws Exception {
+
+        String jsonRequestFilePath = pathToRequestsDirectory + "feedly_markArticleAsRead.txt";
+        String methodName = "feedly_markArticleAsRead";
+
+        final String jsonString = ConnectorIntegrationUtil.getFileContent(jsonRequestFilePath);
+        String newJsonString = String.format(jsonString,
+                feedlyConnectorProperties.getProperty("accessToken"),
+                feedlyConnectorProperties.getProperty("entryIdThree"),
+                feedlyConnectorProperties.getProperty("entryIdFour"));
+
+        final String proxyFilePath = "file:///" + pathToProxiesDirectory + methodName + ".xml";
+        proxyAdmin.addProxyService(new DataHandler(new URL(proxyFilePath)));
+
+        try {
+            int response = ConnectorIntegrationUtil.sendRequestToRetriveHeaders(getProxyServiceURL(methodName),newJsonString);
+
+            Assert.assertTrue(response == 200);
+        } finally {
+            proxyAdmin.deleteProxy(methodName);
+        }
+    }
+
+
+    /**
+     * test case for markArticleAsUnread method.
+     */
+    @Test(groups = { "wso2.esb" },priority = 22, description = "Feedly {markArticleAsUnread} integration test.")
+    public void testMarkArticleAsUnread() throws Exception {
+
+        String jsonRequestFilePath = pathToRequestsDirectory + "feedly_markArticleAsUnread.txt";
+        String methodName = "feedly_markArticleAsUnread";
+
+        final String jsonString = ConnectorIntegrationUtil.getFileContent(jsonRequestFilePath);
+        String newJsonString = String.format(jsonString,
+                feedlyConnectorProperties.getProperty("accessToken"),
+                feedlyConnectorProperties.getProperty("entryIdThree"),
+                feedlyConnectorProperties.getProperty("entryIdFour"));
+
+        final String proxyFilePath = "file:///" + pathToProxiesDirectory + methodName + ".xml";
+        proxyAdmin.addProxyService(new DataHandler(new URL(proxyFilePath)));
+
+        try {
+            int response = ConnectorIntegrationUtil.sendRequestToRetriveHeaders(getProxyServiceURL(methodName),newJsonString);
+
+            Assert.assertTrue(response == 200);
+        } finally {
+            proxyAdmin.deleteProxy(methodName);
+        }
+    }
+
+    /**
+     * test case for markFeedAsRead method.
+     */
+    @Test(groups = { "wso2.esb" },priority = 23, description = "Feedly {markFeedAsRead} integration test.")
+    public void testMarkFeedAsRead() throws Exception {
+
+        String jsonRequestFilePath = pathToRequestsDirectory + "feedly_markFeedAsRead.txt";
+        String methodName = "feedly_markFeedAsRead";
+
+        final String jsonString = ConnectorIntegrationUtil.getFileContent(jsonRequestFilePath);
+        String newJsonString = String.format(jsonString,
+                feedlyConnectorProperties.getProperty("accessToken"),
+                feedlyConnectorProperties.getProperty("entryIdFour"),
+                feedlyConnectorProperties.getProperty("feedIdThree"));
+
+        final String proxyFilePath = "file:///" + pathToProxiesDirectory + methodName + ".xml";
+        proxyAdmin.addProxyService(new DataHandler(new URL(proxyFilePath)));
+
+        try {
+            int response = ConnectorIntegrationUtil.sendRequestToRetriveHeaders(getProxyServiceURL(methodName),newJsonString);
+
+            Assert.assertTrue(response == 200);
+        } finally {
+            proxyAdmin.deleteProxy(methodName);
+        }
+    }
+
+    /**
+     * test case for markCategoryAsRead method.
+     */
+    @Test(groups = { "wso2.esb" },priority = 24, description = "Feedly {markCategoryAsRead} integration test.")
+    public void testMarkCategoryAsRead() throws Exception {
+
+        String jsonRequestFilePath = pathToRequestsDirectory + "feedly_markCategoryAsRead.txt";
+        String methodName = "feedly_markCategoryAsRead";
+
+        final String jsonString = ConnectorIntegrationUtil.getFileContent(jsonRequestFilePath);
+        String newJsonString = String.format(jsonString,
+                feedlyConnectorProperties.getProperty("accessToken"),
+                feedlyConnectorProperties.getProperty("entryIdFour"),
+                feedlyConnectorProperties.getProperty("categoryId"));
+
+        final String proxyFilePath = "file:///" + pathToProxiesDirectory + methodName + ".xml";
+        proxyAdmin.addProxyService(new DataHandler(new URL(proxyFilePath)));
+
+        try {
+            int response = ConnectorIntegrationUtil.sendRequestToRetriveHeaders(getProxyServiceURL(methodName),newJsonString);
+
+            Assert.assertTrue(response == 200);
+        } finally {
+            proxyAdmin.deleteProxy(methodName);
+        }
+    }
+
+    /**
+     * test case for undoMarkAsReadForCategories method.
+     */
+    @Test(groups = { "wso2.esb" },priority = 25, description = "Feedly {undoMarkAsReadForCategories} integration test.")
+    public void testUndoMarkAsReadForCategories() throws Exception {
+
+        String jsonRequestFilePath = pathToRequestsDirectory + "feedly_undoMarkAsReadForCategories.txt";
+        String methodName = "feedly_undoMarkAsRead";
+
+        final String jsonString = ConnectorIntegrationUtil.getFileContent(jsonRequestFilePath);
+        String newJsonString = String.format(jsonString,
+                feedlyConnectorProperties.getProperty("accessToken"),
+                feedlyConnectorProperties.getProperty("categoryIdTwo"),
+                feedlyConnectorProperties.getProperty("categoryIdThree"));
+
+        final String proxyFilePath = "file:///" + pathToProxiesDirectory + methodName + ".xml";
+        proxyAdmin.addProxyService(new DataHandler(new URL(proxyFilePath)));
+
+        try {
+            int response = ConnectorIntegrationUtil.sendRequestToRetriveHeaders(getProxyServiceURL(methodName),newJsonString);
+
+            Assert.assertTrue(response == 200);
+        } finally {
+            proxyAdmin.deleteProxy(methodName);
+        }
+    }
+
+    /**
+     * test case for undoMarkAsReadForFeeds method.
+     */
+    @Test(groups = { "wso2.esb" },priority = 26, description = "Feedly {undoMarkAsReadForFeeds} integration test.")
+    public void testUndoMarkAsReadForFeeds() throws Exception {
+
+        String jsonRequestFilePath = pathToRequestsDirectory + "feedly_undoMarkAsReadForFeeds.txt";
+        String methodName = "feedly_undoMarkAsRead";
+
+        final String jsonString = ConnectorIntegrationUtil.getFileContent(jsonRequestFilePath);
+        String newJsonString = String.format(jsonString,
+                feedlyConnectorProperties.getProperty("accessToken"),
+                feedlyConnectorProperties.getProperty("feedIdThree"));
+
+        final String proxyFilePath = "file:///" + pathToProxiesDirectory + methodName + ".xml";
+        proxyAdmin.addProxyService(new DataHandler(new URL(proxyFilePath)));
+
+        try {
+            int response = ConnectorIntegrationUtil.sendRequestToRetriveHeaders(getProxyServiceURL(methodName),newJsonString);
+
+            Assert.assertTrue(response == 200);
+        } finally {
+            proxyAdmin.deleteProxy(methodName);
+        }
+    }
+
+    /**
+     * test case for markArticleAsSaved method.
+     */
+    @Test(groups = { "wso2.esb" },priority = 27, description = "Feedly {markArticleAsSaved} integration test.")
+    public void testMarkArticleAsSaved() throws Exception {
+
+        String jsonRequestFilePath = pathToRequestsDirectory + "feedly_markArticleAsSaved.txt";
+        String methodName = "feedly_markArticleAsSaved";
+
+        final String jsonString = ConnectorIntegrationUtil.getFileContent(jsonRequestFilePath);
+        String newJsonString = String.format(jsonString,
+                feedlyConnectorProperties.getProperty("accessToken"),
+                feedlyConnectorProperties.getProperty("entryIdThree"),
+                feedlyConnectorProperties.getProperty("entryIdFour"));
+
+        final String proxyFilePath = "file:///" + pathToProxiesDirectory + methodName + ".xml";
+        proxyAdmin.addProxyService(new DataHandler(new URL(proxyFilePath)));
+
+        try {
+            int response = ConnectorIntegrationUtil.sendRequestToRetriveHeaders(getProxyServiceURL(methodName),newJsonString);
+
+            Assert.assertTrue(response == 200);
+        } finally {
+            proxyAdmin.deleteProxy(methodName);
+        }
+    }
+
+    /**
+     * test case for markArticlesAsUnsaved method.
+     */
+    @Test(groups = { "wso2.esb" },priority = 28, description = "Feedly {markArticlesAsUnsaved} integration test.")
+    public void testMarkArticlesAsUnsaved() throws Exception {
+
+        String jsonRequestFilePath = pathToRequestsDirectory + "feedly_markArticlesAsUnsaved.txt";
+        String methodName = "feedly_markArticlesAsUnsaved";
+
+        final String jsonString = ConnectorIntegrationUtil.getFileContent(jsonRequestFilePath);
+        String newJsonString = String.format(jsonString,
+                feedlyConnectorProperties.getProperty("accessToken"),
+                feedlyConnectorProperties.getProperty("entryIdThree"),
+                feedlyConnectorProperties.getProperty("entryIdFour"));
+
+        final String proxyFilePath = "file:///" + pathToProxiesDirectory + methodName + ".xml";
+        proxyAdmin.addProxyService(new DataHandler(new URL(proxyFilePath)));
+
+        try {
+            int response = ConnectorIntegrationUtil.sendRequestToRetriveHeaders(getProxyServiceURL(methodName),newJsonString);
+
+            Assert.assertTrue(response == 200);
+        } finally {
+            proxyAdmin.deleteProxy(methodName);
+        }
+    }
+
+    /**
+     * test case for getLatestReadOperations method.
+     */
+    @Test(groups = { "wso2.esb" },priority = 29, description = "Feedly {getLatestReadOperations} integration test.")
+    public void testGetLatestReadOperations() throws Exception {
+
+        String jsonRequestFilePath = pathToRequestsDirectory + "feedly_getLatestReadOperations.txt";
+        String methodName = "feedly_getLatestReadOperations";
+
+        final String jsonString = ConnectorIntegrationUtil.getFileContent(jsonRequestFilePath);
+        String newJsonString = String.format(jsonString,
+                feedlyConnectorProperties.getProperty("accessToken"));
+
+        final String proxyFilePath = "file:///" + pathToProxiesDirectory + methodName + ".xml";
+        proxyAdmin.addProxyService(new DataHandler(new URL(proxyFilePath)));
+
+        try {
+            JSONObject response = ConnectorIntegrationUtil.sendRequest(getProxyServiceURL(methodName),newJsonString);
+
+            Assert.assertTrue(response.has("feeds"));
+        } finally {
+            proxyAdmin.deleteProxy(methodName);
+        }
+    }
+
+    /**
+     * Optional test case for getLatestReadOperations method.
+     */
+    @Test(groups = { "wso2.esb" },priority = 30, description = "Feedly {getLatestReadOperationsOptional} integration test.")
+    public void testGetLatestReadOperationsOptional() throws Exception {
+
+        String jsonRequestFilePath = pathToRequestsDirectory + "feedly_getLatestReadOperationsOptional.txt";
+        String methodName = "feedly_getLatestReadOperations";
+
+        final String jsonString = ConnectorIntegrationUtil.getFileContent(jsonRequestFilePath);
+        String newJsonString = String.format(jsonString,
+                feedlyConnectorProperties.getProperty("accessToken"));
+
+        final String proxyFilePath = "file:///" + pathToProxiesDirectory + methodName + ".xml";
+        proxyAdmin.addProxyService(new DataHandler(new URL(proxyFilePath)));
+
+        try {
+            JSONObject response = ConnectorIntegrationUtil.sendRequest(getProxyServiceURL(methodName),newJsonString);
+
+            Assert.assertTrue(response.has("feeds"));
+        } finally {
+            proxyAdmin.deleteProxy(methodName);
+        }
+    }
+
+    /**
+     * test case for getLatestTagEntryIds method.
+     */
+    @Test(groups = { "wso2.esb" },priority = 31, description = "Feedly {getLatestTagEntryIds} integration test.")
+    public void testGetLatestTagEntryIds() throws Exception {
+
+        String jsonRequestFilePath = pathToRequestsDirectory + "feedly_getLatestTagEntryIds.txt";
+        String methodName = "feedly_getLatestTagEntryIds";
+
+        final String jsonString = ConnectorIntegrationUtil.getFileContent(jsonRequestFilePath);
+        String newJsonString = String.format(jsonString,
+                feedlyConnectorProperties.getProperty("accessToken"));
+
+        final String proxyFilePath = "file:///" + pathToProxiesDirectory + methodName + ".xml";
+        proxyAdmin.addProxyService(new DataHandler(new URL(proxyFilePath)));
+
+        try {
+            JSONObject response = ConnectorIntegrationUtil.sendRequest(getProxyServiceURL(methodName),newJsonString);
+
+            Assert.assertTrue(response.has("taggedEntries"));
+        } finally {
+            proxyAdmin.deleteProxy(methodName);
+        }
+    }
+
+    /**
+     * Optional test case for getLatestTagEntryIds method.
+     */
+    @Test(groups = { "wso2.esb" },priority = 32, description = "Feedly {getLatestTagEntryIdsOptional} integration test.")
+    public void testGetLatestTagEntryIdsOptional() throws Exception {
+
+        String jsonRequestFilePath = pathToRequestsDirectory + "feedly_getLatestTagEntryIdsOptional.txt";
+        String methodName = "feedly_getLatestTagEntryIds";
+
+        final String jsonString = ConnectorIntegrationUtil.getFileContent(jsonRequestFilePath);
+        String newJsonString = String.format(jsonString,
+                feedlyConnectorProperties.getProperty("accessToken"));
+
+        final String proxyFilePath = "file:///" + pathToProxiesDirectory + methodName + ".xml";
+        proxyAdmin.addProxyService(new DataHandler(new URL(proxyFilePath)));
+
+        try {
+            JSONObject response = ConnectorIntegrationUtil.sendRequest(getProxyServiceURL(methodName),newJsonString);
+
+            Assert.assertTrue(response.has("taggedEntries"));
+        } finally {
+            proxyAdmin.deleteProxy(methodName);
+        }
+    }
+
 }

@@ -1,0 +1,55 @@
+<template name="getMetadataForListOfFeeds" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter name="feedIds" description="ids of feeds." />
+    <sequence>
+        <property name="uri.var.feedIds" expression="$func:feedIds" />
+
+        <script language="js">
+            <![CDATA[
+
+			var feeds = ''+mc.getProperty('uri.var.feedIds');
+			var feedsObj = eval ("(" + feeds + ")");
+
+            var query = '[';
+            var added = 0;
+            for(var i in feedsObj) {
+                var temp = feedsObj[i];
+                if(added == 0) {
+                    query = query + '"feed/'+temp+'"';
+                    added = 1;
+                }else {
+                    query = query + ',"feed/'+temp+'"';
+                }
+            }
+
+            query = query + ']';
+            mc.setProperty('uri.var.query', query);
+	 	]]>
+        </script>
+
+        <log level="custom">
+            <property name="feeds" expression="get-property('uri.var.feedIds')"/>
+        </log>
+
+        <header name="Content-Type" value="application/json"
+                scope="transport" />
+        <property name="messageType" value="application/json"
+                  scope="axis2" />
+
+
+        <payloadFactory media-type="json">
+            <format>
+                $1
+            </format>
+            <args>
+                <arg expression="get-property('uri.var.query')" />
+            </args>
+        </payloadFactory>
+
+        <call>
+            <endpoint>
+                <http method="post"
+                      uri-template="http://cloud.feedly.com/v3/feeds/.mget" />
+            </endpoint>
+        </call>
+    </sequence>
+</template>

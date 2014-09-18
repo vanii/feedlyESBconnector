@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <connector>
     <component name="feedly" package="org.wso2.carbon.connector" >
-        <dependency component="helloWorld"/>
         <dependency component="feedly_authentication"/>
         <dependency component="feedly_categories"/>
         <dependency component="feedly_entry"/>

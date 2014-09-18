@@ -8,10 +8,13 @@
     <target>
         <inSequence>
             <property name="accessToken" expression="json-eval($.accessToken)"/>
+            <property name="newerThan" expression="json-eval($.newerThan)"/>
             <feedly.test_init>
                 <accessToken>{$ctx:accessToken}</accessToken>
             </feedly.test_init>
-            <feedly.getLatestTagEntryIds/>
+            <feedly.getLatestTagEntryIds>
+                <newerThan>{$ctx:newerThan}</newerThan>
+            </feedly.getLatestTagEntryIds>
             <respond/>
         </inSequence>
         <outSequence>

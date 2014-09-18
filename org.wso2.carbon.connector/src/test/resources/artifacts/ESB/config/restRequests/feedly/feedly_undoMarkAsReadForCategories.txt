@@ -3,7 +3,7 @@
   "action": "undoMarkAsRead",
   "type": "categories",
   "categoryIds": [
-    "Tech",
-    "test"
+    "%s",
+    "%s"
   ]
 }
