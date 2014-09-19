@@ -1,10 +1,10 @@
 {
   "accessToken":"%s",
-  "categoryId":"global.all",
+  "categoryId":"%s",
   "count" : "3",
   "unreadOnly" : "false",
   "hours" : "24",
   "newerThan" : "1410843612357",
   "backfill" : "true",
-  "locale" : "en_US"
+  "locale" : "%s"
 }

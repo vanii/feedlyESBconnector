@@ -29,6 +29,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONArray;
 import org.wso2.carbon.automation.core.ProductConstant;
 import org.wso2.carbon.mediation.library.stub.upload.MediationLibraryUploaderStub;
 import org.wso2.carbon.mediation.library.stub.upload.types.carbon.LibraryFileItem;
@@ -174,6 +175,56 @@ public class ConnectorIntegrationUtil {
 
         return jsonObject;
     }
+
+
+    public static JSONArray sendRequestJSONArray(String addUrl, String query) throws IOException, JSONException {
+
+        String charset = "UTF-8";
+        URLConnection connection = new URL(addUrl).openConnection();
+        connection.setDoOutput(true);
+        connection.setRequestProperty("Accept-Charset", charset);
+        connection.setRequestProperty("Content-Type", "application/json;charset=" + charset);
+        OutputStream output = null;
+        try {
+            output = connection.getOutputStream();
+            output.write(query.getBytes(charset));
+        } finally {
+            if (output != null) {
+                try {
+                    output.close();
+                } catch (IOException logOrIgnore) {
+                    log.error("Error while closing the connection");
+                }
+            }
+        }
+
+        HttpURLConnection httpConn = (HttpURLConnection) connection;
+        InputStream response;
+
+        if (httpConn.getResponseCode() >= 400) {
+            response = httpConn.getErrorStream();
+        } else {
+            response = connection.getInputStream();
+        }
+
+        String out = "[]";
+        if (response != null) {
+            StringBuilder sb = new StringBuilder();
+            byte[] bytes = new byte[1024];
+            int len;
+            while ((len = response.read(bytes)) != -1) {
+                sb.append(new String(bytes, 0, len));
+            }
+
+            if (!sb.toString().trim().isEmpty()) {
+                out = sb.toString();
+                System.out.println(out);
+            }
+        }
+        //System.out.println(out);
+        return new JSONArray(out);
+    }
+
 
     public static OMElement sendXMLRequest(String addUrl, String query) throws MalformedURLException, IOException,
             XMLStreamException {
