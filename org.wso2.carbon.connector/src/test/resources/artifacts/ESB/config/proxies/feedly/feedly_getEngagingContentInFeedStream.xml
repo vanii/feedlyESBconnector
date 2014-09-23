@@ -14,7 +14,7 @@
             <property name="newerThan" expression="json-eval($.newerThan)"/>
             <property name="backfill" expression="json-eval($.backfill)"/>
             <property name="locale" expression="json-eval($.locale)"/>
-            <feedly.getEngagingContentInStream>
+            <feedly.getEngagingContentInFeedStream>
                 <streamId>{$ctx:feedId}</streamId>
                 <count>{$ctx:count}</count>
                 <unreadOnly>{$ctx:unreadOnly}</unreadOnly>
@@ -22,7 +22,7 @@
                 <newerThan>{$ctx:newerThan}</newerThan>
                 <backfill>{$ctx:backfill}</backfill>
                 <locale>{$ctx:locale}</locale>
-            </feedly.getEngagingContentInStream>
+            </feedly.getEngagingContentInFeedStream>
             <respond/>
         </inSequence>
         <outSequence>

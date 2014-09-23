@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <proxy xmlns="http://ws.apache.org/ns/synapse"
-       name="feedly_ChangeLabelCategory"
+       name="feedly_changeLabelCategory"
        transports="https,http"
        statistics="disable"
        trace="disable"

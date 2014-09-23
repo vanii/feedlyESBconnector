@@ -3,33 +3,6 @@
     <sequence>
         <property name="uri.var.entryId" expression="$func:entryId" />
 
-        <script language="js">
-            <![CDATA[
-
-			var entries = ''+mc.getProperty('uri.var.entryId');
-			var entriesObj = eval ("(" + entries + ")");
-
-            var query = '[';
-            var added = 0;
-            for(var i in entriesObj) {
-                var temp = entriesObj[i];
-                if(added == 0) {
-                    query = query + '"'+temp+'"';
-                    added = 1;
-                }else {
-                    query = query + ',"'+temp+'"';
-                }
-            }
-
-            query = query + ']';
-            mc.setProperty('uri.var.query', query);
-	 	]]>
-        </script>
-
-        <log level="custom">
-            <property name="entries" expression="get-property('uri.var.query')"/>
-        </log>
-
         <header name="Content-Type" value="application/json"
                 scope="transport" />
         <property name="messageType" value="application/json"
@@ -41,7 +14,7 @@
                 $1
             </format>
             <args>
-                <arg expression="get-property('uri.var.query')" />
+                <arg expression="get-property('uri.var.entryId')" />
             </args>
         </payloadFactory>
 

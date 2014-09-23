@@ -8,6 +8,36 @@
         <property name="uri.var.feedIds" expression="$func:feedIds" />
         <property name="uri.var.lastReadEntryId" expression="$func:lastReadEntryId" />
 
+        <script language="js">
+            <![CDATA[
+            var feeds = '{"feeds":' + mc.getProperty('uri.var.feedIds') + '}';
+
+            var query = "[";
+            if (mc.getProperty('uri.var.feedIds') != null && mc.getProperty('uri.var.feedIds') != "") {
+
+                var feedsObj = eval ("(" + feeds + ")");
+
+                var count = 0;
+                for (var key in feedsObj.feeds) {
+                    if (feedsObj.feeds.hasOwnProperty(key)) {
+                        if(count == 0 ) {
+                        query = query + '"feed/' + feedsObj.feeds[key]+'"';
+                        count =1;
+                        }else {
+                        query = query + ',"feed/' + feedsObj.feeds[key]+'"';
+                        }
+
+                    }
+                }
+
+            }
+
+            query = query + "]";
+            mc.setProperty('uri.var.query', query);
+
+            ]]>
+        </script>
+
         <header name="Content-Type" value="application/json"
                 scope="transport" />
         <property name="messageType" value="application/json"
@@ -26,7 +56,7 @@
             <args>
                 <arg expression="get-property('uri.var.action')" />
                 <arg expression="get-property('uri.var.lastReadEntryId')" />
-                <arg expression="get-property('uri.var.feedIds')" />
+                <arg expression="get-property('uri.var.query')" />
             </args>
         </payloadFactory>
 

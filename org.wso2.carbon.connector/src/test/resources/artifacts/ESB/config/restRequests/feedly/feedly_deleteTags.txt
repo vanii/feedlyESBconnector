@@ -2,7 +2,6 @@
   "accessToken":"%s",
   "tagId":
   [
-    {"id":"today"},
-    {"id":"global.all"}
+    {"id":"%s"}
     ]
 }

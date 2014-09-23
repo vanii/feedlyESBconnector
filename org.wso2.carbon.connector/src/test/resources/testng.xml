@@ -12,7 +12,19 @@
     
     <test name="feedly-Connector-Test" preserve-order="true" verbose="2">
         <packages>
-            <package name="org.wso2.carbon.connector.integration.test.feedly"/>
+            <package name="org.wso2.carbon.connector.integration.test.categories"/>
+            <package name="org.wso2.carbon.connector.integration.test.entry"/>
+            <package name="org.wso2.carbon.connector.integration.test.feeds"/>
+            <package name="org.wso2.carbon.connector.integration.test.markers"/>
+            <package name="org.wso2.carbon.connector.integration.test.mixes"/>
+            <package name="org.wso2.carbon.connector.integration.test.opml"/>
+            <package name="org.wso2.carbon.connector.integration.test.preferences"/>
+            <package name="org.wso2.carbon.connector.integration.test.profile"/>
+            <package name="org.wso2.carbon.connector.integration.test.search"/>
+            <package name="org.wso2.carbon.connector.integration.test.stream"/>
+            <package name="org.wso2.carbon.connector.integration.test.subscription"/>
+            <package name="org.wso2.carbon.connector.integration.test.tags"/>
+            <package name="org.wso2.carbon.connector.integration.test.topics"/>
         </packages>
     </test>
 

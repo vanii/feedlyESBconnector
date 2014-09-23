@@ -1,5 +1,5 @@
 {
 "accessToken":"%s",
-"oldLabel":"test",
-"newLabel":"testChange"
+"oldLabel":"%s",
+"newLabel":"%s"
 }

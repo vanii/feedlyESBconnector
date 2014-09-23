@@ -17,12 +17,12 @@
          ]]></script>
 
         <log level="custom">
-            <property name="topicId" expression="get-property('id')"/>
+            <property name="topicId" expression="get-property('uri.var.id')"/>
         </log>
         <call>
             <endpoint>
                 <http method="delete"
-                      uri-template="{uri.var.apiUrl}/v3/topics/user%252F{uri.var.userId}%252Ftopic%252F{uri.var.topicId}" />
+                      uri-template="{uri.var.apiUrl}/v3/topics/{uri.var.id}" />
             </endpoint>
         </call>
     </sequence>

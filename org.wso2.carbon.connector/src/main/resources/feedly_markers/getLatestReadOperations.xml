@@ -3,32 +3,40 @@
     <sequence>
         <property name="uri.var.newerThan" expression="$func:newerThan" />
 
-        <script language="js">
-            <![CDATA[
+        <filter
+                xpath="get-property('uri.var.newerThan') = '' or  (not(string(get-property('uri.var.newerThan'))))">
+            <then>
+                <property name="uri.var.newerThan" value="30" />
+            </then>
+        </filter>
 
-			var newerThan = mc.getProperty('uri.var.newerThan');
 
-			var added = 0;
-            var query = "";
+        <!--<script language="js">-->
+            <!--<![CDATA[-->
 
-			if (newerThan != null && newerThan != "") {
-				if(Boolean(added)) {
-			        query = query + '&amp;newerThan='+newerThan;
-			    }else {
-			        query = query + 'newerThan='+newerThan;
-			        added = 1;
-			    }
-			}
+			<!--var newerThan = mc.getProperty('uri.var.newerThan');-->
 
-			mc.setProperty('uri.var.params', query);
+			<!--var added = 0;-->
+            <!--var query = "";-->
 
-	 	]]>
-        </script>
+			<!--if (newerThan != null && newerThan != "") {-->
+				<!--if(Boolean(added)) {-->
+			        <!--query = query + '&amp;newerThan='+newerThan;-->
+			    <!--}else {-->
+			        <!--query = query + 'newerThan='+newerThan;-->
+			        <!--added = 1;-->
+			    <!--}-->
+			<!--}-->
+
+			<!--mc.setProperty('uri.var.params', query);-->
+
+	 	<!--]]>-->
+        <!--</script>-->
 
         <call>
             <endpoint>
                 <http method="get"
-                      uri-template="{uri.var.apiUrl}/v3/markers/reads?{uri.var.params}" />
+                      uri-template="{uri.var.apiUrl}/v3/markers/reads?newerThan={uri.var.newerThan}" />
             </endpoint>
         </call>
     </sequence>

@@ -26,10 +26,6 @@
 	 	]]>
         </script>
 
-        <log level="custom">
-            <property name="feeds" expression="get-property('uri.var.feedIds')"/>
-        </log>
-
         <header name="Content-Type" value="application/json"
                 scope="transport" />
         <property name="messageType" value="application/json"

@@ -21,9 +21,5 @@
             <file>tagMultipleEntries.xml</file>
             <description>Tag multiple entries.</description>
         </component>
-        <component name="untagMultipleEntries">
-            <file>untagMultipleEntries.xml</file>
-            <description>Untag multiple entries</description>
-        </component>
     </subComponents>
 </component>

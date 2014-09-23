@@ -6,10 +6,13 @@
         <property name="uri.var.tagId" expression="$func:tagId" />
         <property name="uri.var.label" expression="$func:label" />
 
+        <property name="feedly.tagId"
+                  expression="fn:concat('user/', get-property('uri.var.userId'), '/tag/', get-property('uri.var.tagId'))" />
+
         <script language="js">
             <![CDATA[
 
-            var query = 'user%2F'+mc.getProperty('uri.var.userId')+'%2Ftag%2F' +mc.getProperty('uri.var.tagId');
+            var query = encodeURIComponent(mc.getProperty('feedly.tagId'));
 
 			mc.setProperty('uri.var.query', query);
 

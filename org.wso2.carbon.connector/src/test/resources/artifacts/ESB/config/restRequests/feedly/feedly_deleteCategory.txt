@@ -1,4 +1,4 @@
 {
-"accessToken":"%s(accessToken)",
+"accessToken":"%s",
 "label":"keep"
 }

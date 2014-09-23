@@ -12,21 +12,21 @@
 
         <script language="js"><![CDATA[
 
-					var message = mc.getProperty('feedly.categoryId');
-					var encoded = encodeURIComponent(message);
+            var message = mc.getProperty('feedly.categoryId');
+            var encoded = encodeURIComponent(message);
 
-					mc.setProperty('uri.var.id', encoded);
+            mc.setProperty('uri.var.id', encoded);
 
 
-        		 ]]></script>
+         ]]></script>
 
         <log level="custom">
-            <property name="requestMethod" expression="get-property('id')"/>
+            <property name="requestMethod" expression="get-property('uri.var.id')"/>
         </log>
         <call>
             <endpoint>
                 <http method="delete"
-                      uri-template="{uri.var.apiUrl}/v3/categories/user%252F{uri.var.userId}%252Fcategory%252F{uri.var.label}" />
+                      uri-template="{uri.var.apiUrl}/v3/categories/{uri.var.id}" />
             </endpoint>
         </call>
     </sequence>
